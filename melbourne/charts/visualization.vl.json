@@ -1,0 +1,181 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.2.json",
+  "width": "container",
+  "height": 450,
+  "title": {
+    "text": "Time Out Best Cities in the World - Top 10 Rankings",
+    "subtitle": "Melbourne's rise to #1 in 2026",
+    "fontSize": 16,
+    "subtitleFontSize": 13,
+    "anchor": "start",
+    "offset": 16
+  },
+  "data": {
+    "values": [
+      {"city": "Melbourne", "year": "2024", "rank": 4},
+      {"city": "Melbourne", "year": "2025", "rank": 4},
+      {"city": "Melbourne", "year": "2026", "rank": 1},
+      {"city": "Cape Town", "year": "2024", "rank": 2},
+      {"city": "Cape Town", "year": "2025", "rank": 1},
+      {"city": "Cape Town", "year": "2026", "rank": 6},
+      {"city": "New York", "year": "2024", "rank": 1},
+      {"city": "New York", "year": "2025", "rank": 3},
+      {"city": "New York", "year": "2026", "rank": 5},
+      {"city": "London", "year": "2024", "rank": 4},
+      {"city": "London", "year": "2025", "rank": 5},
+      {"city": "London", "year": "2026", "rank": 4},
+      {"city": "Edinburgh", "year": "2026", "rank": 3},
+      {"city": "Bangkok", "year": "2025", "rank": 2},
+      {"city": "Bangkok", "year": "2026", "rank": 8},
+      {"city": "Shanghai", "year": "2025", "rank": 9},
+      {"city": "Shanghai", "year": "2026", "rank": 2},
+      {"city": "Tokyo", "year": "2024", "rank": 8},
+      {"city": "Tokyo", "year": "2025", "rank": 10},
+      {"city": "Tokyo", "year": "2026", "rank": 10},
+      {"city": "Mexico City", "year": "2024", "rank": 6},
+      {"city": "Mexico City", "year": "2025", "rank": 7},
+      {"city": "Mexico City", "year": "2026", "rank": 7},
+      {"city": "Copenhagen", "year": "2025", "rank": 10},
+      {"city": "Seoul", "year": "2026", "rank": 9},
+      {"city": "Porto", "year": "2024", "rank": 10},
+      {"city": "Porto", "year": "2025", "rank": 8},
+      {"city": "New Orleans", "year": "2025", "rank": 6},
+      {"city": "Berlin", "year": "2024", "rank": 3},
+      {"city": "Madrid", "year": "2024", "rank": 5},
+      {"city": "Rome", "year": "2024", "rank": 9}
+    ]
+  },
+  "layer": [
+    {
+      "mark": {"type": "line", "point": false},
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "axis": {
+            "title": null,
+            "labelFontSize": 13,
+            "labelFontWeight": "bold"
+          }
+        },
+        "y": {
+          "field": "rank",
+          "type": "quantitative",
+          "scale": {"domain": [1, 10], "reverse": true},
+          "axis": {
+            "title": "Ranking",
+            "tickMinStep": 1,
+            "values": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            "labelFontSize": 12
+          }
+        },
+        "color": {
+          "condition": {
+            "test": "datum.city === 'Melbourne'",
+            "value": "#E05C1A"
+          },
+          "value": "#d0d0d0"
+        },
+        "strokeWidth": {
+          "condition": {"test": "datum.city === 'Melbourne'", "value": 4},
+          "value": 1.5
+        },
+        "opacity": {
+          "condition": {"test": "datum.city === 'Melbourne'", "value": 1},
+          "value": 0.4
+        },
+        "detail": {"field": "city", "type": "nominal"},
+        "tooltip": [
+          {"field": "city", "type": "nominal", "title": "City"},
+          {"field": "year", "type": "ordinal", "title": "Year"},
+          {"field": "rank", "type": "quantitative", "title": "Rank"}
+        ]
+      }
+    },
+    {
+      "mark": {"type": "point", "filled": true},
+      "encoding": {
+        "x": {"field": "year", "type": "ordinal"},
+        "y": {
+          "field": "rank",
+          "type": "quantitative",
+          "scale": {"domain": [1, 10], "reverse": true}
+        },
+        "color": {
+          "condition": {
+            "test": "datum.city === 'Melbourne'",
+            "value": "#E05C1A"
+          },
+          "value": "#d0d0d0"
+        },
+        "size": {
+          "condition": {"test": "datum.city === 'Melbourne'", "value": 150},
+          "value": 50
+        },
+        "opacity": {
+          "condition": {"test": "datum.city === 'Melbourne'", "value": 1},
+          "value": 0.4
+        },
+        "detail": {"field": "city", "type": "nominal"},
+        "tooltip": [
+          {"field": "city", "type": "nominal", "title": "City"},
+          {"field": "year", "type": "ordinal", "title": "Year"},
+          {"field": "rank", "type": "quantitative", "title": "Rank"}
+        ]
+      }
+    },
+    {
+      "transform": [
+        {"filter": "datum.city === 'Melbourne' && datum.year === '2026'"}
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 10,
+        "fontSize": 13,
+        "fontWeight": "bold",
+        "color": "#E05C1A"
+      },
+      "encoding": {
+        "x": {"field": "year", "type": "ordinal"},
+        "y": {
+          "field": "rank",
+          "type": "quantitative",
+          "scale": {"domain": [1, 10], "reverse": true}
+        },
+        "text": {"value": "Melbourne"}
+      }
+    },
+    {
+      "transform": [
+        {"filter": "datum.year === '2026' && datum.city !== 'Melbourne'"}
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 10,
+        "fontSize": 11,
+        "color": "#999"
+      },
+      "encoding": {
+        "x": {"field": "year", "type": "ordinal"},
+        "y": {
+          "field": "rank",
+          "type": "quantitative",
+          "scale": {"domain": [1, 10], "reverse": true}
+        },
+        "text": {"field": "city"}
+      }
+    }
+  ],
+  "config": {
+    "view": {"stroke": null},
+    "axis": {
+      "grid": true,
+      "gridColor": "#e8e8e8",
+      "gridDash": [3, 3],
+      "domainColor": "#ccc",
+      "tickColor": "#ccc"
+    }
+  }
+}
