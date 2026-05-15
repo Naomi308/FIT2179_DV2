@@ -1,0 +1,240 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.2.json",
+  "title": {
+    "text": "Cafes and Restaurants in the City of Melbourne",
+    "subtitle": "2024 venue locations by seating capacity and venue type",
+    "anchor": "start",
+    "font": "Arial",
+    "fontSize": 18,
+    "fontWeight": "bold",
+    "subtitleFont": "Arial",
+    "subtitleFontSize": 12,
+    "subtitleColor": "#5f6b7a",
+    "offset": 14
+  },
+  "width": "container",
+  "height": 520,
+  "params": [
+    {
+      "name": "zoom_level",
+      "value": 230000,
+      "bind": {
+        "input": "range",
+        "min": 70000,
+        "max": 350000,
+        "step": 5000,
+        "name": "Zoom: "
+      }
+    },
+    {
+      "name": "center_to",
+      "value": [144.9631, -37.8136],
+      "bind": {
+        "input": "select",
+        "options": [
+          [144.9631, -37.8136],
+          [144.951, -37.806],
+          [144.982, -37.82],
+          [144.945, -37.82],
+          [144.97, -37.79]
+        ],
+        "labels": [
+          "Melbourne CBD",
+          "Docklands / West",
+          "East Melbourne",
+          "West Melbourne",
+          "North Melbourne"
+        ],
+        "name": "Map centre: "
+      }
+    },
+    {
+      "name": "Venue_type_selection",
+      "value": "All",
+      "bind": {
+        "input": "select",
+        "options": ["All", "Cafe", "Restaurant", "Other"],
+        "name": "Venue type: "
+      }
+    },
+    {
+      "name": "Min_seats",
+      "value": 0,
+      "bind": {
+        "input": "range",
+        "min": 0,
+        "max": 300,
+        "step": 10,
+        "name": "Minimum seats: "
+      }
+    }
+  ],
+  "projection": {
+    "type": "equirectangular",
+    "center": {"expr": "center_to"},
+    "scale": {"expr": "zoom_level"}
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/Naomi308/FIT2129_DV2/master/melbourne/data/municipal-boundary.geojson",
+        "format": {"type": "json", "property": "features"}
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#f8fafc",
+        "stroke": "#1e293b",
+        "strokeWidth": 2.2
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/Naomi308/FIT2129_DV2/master/melbourne/data/vic_localities%20%281%29.json",
+        "format": {"type": "topojson", "feature": "vic_localities"}
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": null,
+        "stroke": "#64748b",
+        "strokeWidth": 1.1,
+        "strokeOpacity": 0.9
+      },
+      "encoding": {
+        "tooltip": {
+          "field": "properties.NAME",
+          "type": "nominal",
+          "title": "Locality"
+        }
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/Naomi308/FIT2129_DV2/master/melbourne/data/cafes-and-restaurants-with-seating-capacity.csv",
+        "format": {"type": "csv"}
+      },
+      "transform": [
+        {"calculate": "toString(datum['Census year'])", "as": "year"},
+        {"calculate": "toNumber(datum['Longitude'])", "as": "lon"},
+        {"calculate": "toNumber(datum['Latitude'])", "as": "lat"},
+        {"calculate": "toNumber(datum['Number of seats'])", "as": "seats"},
+        {
+          "calculate": "isValid(datum['Trading name']) ? lower(datum['Trading name']) : ''",
+          "as": "trading_text"
+        },
+        {
+          "calculate": "isValid(datum['Industry (ANZSIC4) description']) ? lower(datum['Industry (ANZSIC4) description']) : ''",
+          "as": "industry_text"
+        },
+        {
+          "calculate": "indexof(datum.trading_text, 'cafe') >= 0 || indexof(datum.trading_text, 'coffee') >= 0 || indexof(datum.trading_text, 'espresso') >= 0 || indexof(datum.trading_text, 'roasters') >= 0 ? 'Cafe' : indexof(datum.trading_text, 'restaurant') >= 0 || indexof(datum.trading_text, 'bistro') >= 0 || indexof(datum.trading_text, 'grill') >= 0 || indexof(datum.trading_text, 'dining') >= 0 || indexof(datum.trading_text, 'kitchen') >= 0 || indexof(datum.industry_text, 'restaurant') >= 0 ? 'Restaurant' : 'Other'",
+          "as": "venue_type"
+        },
+        {"filter": "datum.year == '2024'"},
+        {
+          "filter": "Venue_type_selection == 'All' || datum.venue_type == Venue_type_selection"
+        },
+        {
+          "filter": "isValid(datum.lon) && isValid(datum.lat) && isValid(datum.seats)"
+        },
+        {
+          "filter": "datum.lon >= 144.88 && datum.lon <= 145.05 && datum.lat >= -37.92 && datum.lat <= -37.74"
+        },
+        {
+          "aggregate": [
+            {"op": "sum", "field": "seats", "as": "total_seats"},
+            {"op": "count", "as": "records"}
+          ],
+          "groupby": [
+            "Trading name",
+            "Business address",
+            "CLUE small area",
+            "Industry (ANZSIC4) description",
+            "venue_type",
+            "lon",
+            "lat",
+            "year"
+          ]
+        },
+        {"filter": "datum.total_seats >= Min_seats"},
+        {
+          "calculate": "datum.total_seats > 500 ? 500 : datum.total_seats",
+          "as": "seat_size_capped"
+        }
+      ],
+      "mark": {
+        "type": "circle",
+        "opacity": 0.78,
+        "stroke": "#ffffff",
+        "strokeWidth": 0.8
+      },
+      "encoding": {
+        "longitude": {"field": "lon", "type": "quantitative"},
+        "latitude": {"field": "lat", "type": "quantitative"},
+        "size": {
+          "field": "seat_size_capped",
+          "type": "quantitative",
+          "scale": {"domain": [0, 500], "range": [18, 850]},
+          "legend": {
+            "title": "Total seats",
+            "orient": "right",
+            "labelFont": "Arial",
+            "labelFontSize": 11,
+            "titleFont": "Arial",
+            "titleFontSize": 12,
+            "titleFontWeight": "bold"
+          }
+        },
+        "color": {
+          "field": "venue_type",
+          "type": "nominal",
+          "scale": {
+            "domain": ["Cafe", "Restaurant", "Other"],
+            "range": ["#f59e0b", "#ef4444", "#6b7280"]
+          },
+          "legend": {
+            "title": "Venue type",
+            "orient": "right",
+            "labelFont": "Arial",
+            "labelFontSize": 11,
+            "titleFont": "Arial",
+            "titleFontSize": 12,
+            "titleFontWeight": "bold"
+          }
+        },
+        "tooltip": [
+          {"field": "Trading name", "type": "nominal", "title": "Trading name"},
+          {"field": "Business address", "type": "nominal", "title": "Address"},
+          {"field": "venue_type", "type": "nominal", "title": "Venue type"},
+          {
+            "field": "CLUE small area",
+            "type": "nominal",
+            "title": "CLUE small area"
+          },
+          {
+            "field": "Industry (ANZSIC4) description",
+            "type": "nominal",
+            "title": "Industry"
+          },
+          {
+            "field": "total_seats",
+            "type": "quantitative",
+            "title": "Total seats",
+            "format": ",.0f"
+          },
+          {
+            "field": "records",
+            "type": "quantitative",
+            "title": "Records aggregated",
+            "format": ",.0f"
+          },
+          {"field": "year", "type": "nominal", "title": "Year"}
+        ]
+      }
+    }
+  ],
+  "config": {
+    "background": "#ffffff",
+    "view": {"stroke": "#d1d5db"},
+    "legend": {"symbolStrokeWidth": 0.7}
+  }
+}
