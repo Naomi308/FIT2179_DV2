@@ -1,0 +1,399 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.2.json",
+  "title": {
+    "text": "Liveability Profiles Across Melbourne Neighbourhoods",
+    "subtitle": "Each suburb is shown as a radial chart across four liveability indicators, 2022",
+    "anchor": "start",
+    "font": "Arial",
+    "fontSize": 17,
+    "fontWeight": "bold",
+    "subtitleFont": "Arial",
+    "subtitleFontSize": 12,
+    "subtitleColor": "#5f6b7a",
+    "offset": 14
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/Naomi308/FIT2129_DV2/master/melbourne/data/suburb_liveability.csv",
+    "format": {"type": "csv"}
+  },
+  "transform": [
+    {
+      "fold": ["quality_of_life", "safety_day", "safety_night", "wellbeing"],
+      "as": ["metric", "value"]
+    },
+    {"calculate": "toNumber(datum.value)", "as": "value"},
+    {
+      "calculate": "datum.metric === 'quality_of_life' ? 'Quality of life' : datum.metric === 'safety_day' ? 'Safe (day)' : datum.metric === 'safety_night' ? 'Safe (night)' : 'Wellbeing'",
+      "as": "metric_label"
+    },
+    {
+      "calculate": "datum.metric === 'quality_of_life' ? 1 : datum.metric === 'safety_day' ? 2 : datum.metric === 'safety_night' ? 3 : 4",
+      "as": "metric_order"
+    },
+    {
+      "joinaggregate": [{"op": "mean", "field": "value", "as": "avg_score"}],
+      "groupby": ["suburb"]
+    },
+    {"calculate": "100", "as": "max_value"},
+    {
+      "calculate": "datum.value > 94 ? 100 : datum.value + 6",
+      "as": "label_radius"
+    }
+  ],
+  "vconcat": [
+    {
+      "transform": [
+        {
+          "filter": "datum.suburb === 'East Melbourne' || datum.suburb === 'Kensington' || datum.suburb === 'South Yarra' || datum.suburb === 'Southbank' || datum.suburb === 'Docklands'"
+        }
+      ],
+      "columns": 5,
+      "spacing": 8,
+      "facet": {
+        "field": "suburb",
+        "type": "nominal",
+        "sort": [
+          "East Melbourne",
+          "Kensington",
+          "South Yarra",
+          "Southbank",
+          "Docklands"
+        ],
+        "header": {
+          "title": null,
+          "labelFont": "Arial",
+          "labelFontSize": 10.5,
+          "labelFontWeight": "bold",
+          "labelColor": "#1f2937",
+          "labelPadding": 7
+        }
+      },
+      "spec": {
+        "width": 115,
+        "height": 115,
+        "layer": [
+          {
+            "mark": {
+              "type": "arc",
+              "innerRadius": 14,
+              "stroke": "white",
+              "strokeWidth": 1.2
+            },
+            "encoding": {
+              "theta": {
+                "field": "metric_label",
+                "type": "nominal",
+                "sort": [
+                  "Quality of life",
+                  "Safe (day)",
+                  "Safe (night)",
+                  "Wellbeing"
+                ]
+              },
+              "radius": {
+                "field": "max_value",
+                "type": "quantitative",
+                "scale": {"domain": [0, 100], "range": [14, 48]}
+              },
+              "color": {"value": "#e5e7eb"},
+              "order": {"field": "metric_order", "type": "quantitative"}
+            }
+          },
+          {
+            "mark": {
+              "type": "arc",
+              "innerRadius": 14,
+              "stroke": "white",
+              "strokeWidth": 1.2
+            },
+            "encoding": {
+              "theta": {
+                "field": "metric_label",
+                "type": "nominal",
+                "sort": [
+                  "Quality of life",
+                  "Safe (day)",
+                  "Safe (night)",
+                  "Wellbeing"
+                ]
+              },
+              "radius": {
+                "field": "value",
+                "type": "quantitative",
+                "scale": {"domain": [0, 100], "range": [14, 48]}
+              },
+              "color": {
+                "field": "metric_label",
+                "type": "nominal",
+                "scale": {
+                  "domain": [
+                    "Quality of life",
+                    "Safe (day)",
+                    "Safe (night)",
+                    "Wellbeing"
+                  ],
+                  "range": ["#3b82f6", "#14b8a6", "#f59e0b", "#8b5cf6"]
+                },
+                "legend": {
+                  "title": "Indicator",
+                  "orient": "top",
+                  "direction": "horizontal",
+                  "labelFont": "Arial",
+                  "labelFontSize": 11,
+                  "titleFont": "Arial",
+                  "titleFontSize": 12,
+                  "titleFontWeight": "bold"
+                }
+              },
+              "tooltip": [
+                {"field": "suburb", "type": "nominal", "title": "Suburb"},
+                {
+                  "field": "metric_label",
+                  "type": "nominal",
+                  "title": "Indicator"
+                },
+                {
+                  "field": "value",
+                  "type": "quantitative",
+                  "title": "Score",
+                  "format": ".1f"
+                },
+                {
+                  "field": "avg_score",
+                  "type": "quantitative",
+                  "title": "Average score",
+                  "format": ".1f"
+                }
+              ],
+              "order": {"field": "metric_order", "type": "quantitative"}
+            }
+          },
+          {
+            "mark": {
+              "type": "text",
+              "font": "Arial",
+              "fontSize": 8,
+              "fontWeight": "bold",
+              "color": "#374151"
+            },
+            "encoding": {
+              "theta": {
+                "field": "metric_label",
+                "type": "nominal",
+                "sort": [
+                  "Quality of life",
+                  "Safe (day)",
+                  "Safe (night)",
+                  "Wellbeing"
+                ]
+              },
+              "radius": {
+                "field": "label_radius",
+                "type": "quantitative",
+                "scale": {"domain": [0, 100], "range": [14, 48]}
+              },
+              "text": {
+                "field": "value",
+                "type": "quantitative",
+                "format": ".0f"
+              },
+              "order": {"field": "metric_order", "type": "quantitative"}
+            }
+          },
+          {
+            "transform": [{"filter": "datum.metric === 'quality_of_life'"}],
+            "mark": {
+              "type": "text",
+              "font": "Arial",
+              "fontSize": 9,
+              "fontWeight": "bold",
+              "color": "#6b7280"
+            },
+            "encoding": {
+              "text": {
+                "field": "avg_score",
+                "type": "quantitative",
+                "format": ".1f"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.suburb === 'Parkville' || datum.suburb === 'Carlton' || datum.suburb === 'Melbourne CBD' || datum.suburb === 'North Melbourne'"
+        }
+      ],
+      "columns": 4,
+      "spacing": 8,
+      "facet": {
+        "field": "suburb",
+        "type": "nominal",
+        "sort": ["Parkville", "Carlton", "Melbourne CBD", "North Melbourne"],
+        "header": {
+          "title": null,
+          "labelFont": "Arial",
+          "labelFontSize": 10.5,
+          "labelFontWeight": "bold",
+          "labelColor": "#1f2937",
+          "labelPadding": 7
+        }
+      },
+      "spec": {
+        "width": 115,
+        "height": 115,
+        "layer": [
+          {
+            "mark": {
+              "type": "arc",
+              "innerRadius": 14,
+              "stroke": "white",
+              "strokeWidth": 1.2
+            },
+            "encoding": {
+              "theta": {
+                "field": "metric_label",
+                "type": "nominal",
+                "sort": [
+                  "Quality of life",
+                  "Safe (day)",
+                  "Safe (night)",
+                  "Wellbeing"
+                ]
+              },
+              "radius": {
+                "field": "max_value",
+                "type": "quantitative",
+                "scale": {"domain": [0, 100], "range": [14, 48]}
+              },
+              "color": {"value": "#e5e7eb"},
+              "order": {"field": "metric_order", "type": "quantitative"}
+            }
+          },
+          {
+            "mark": {
+              "type": "arc",
+              "innerRadius": 14,
+              "stroke": "white",
+              "strokeWidth": 1.2
+            },
+            "encoding": {
+              "theta": {
+                "field": "metric_label",
+                "type": "nominal",
+                "sort": [
+                  "Quality of life",
+                  "Safe (day)",
+                  "Safe (night)",
+                  "Wellbeing"
+                ]
+              },
+              "radius": {
+                "field": "value",
+                "type": "quantitative",
+                "scale": {"domain": [0, 100], "range": [14, 48]}
+              },
+              "color": {
+                "field": "metric_label",
+                "type": "nominal",
+                "scale": {
+                  "domain": [
+                    "Quality of life",
+                    "Safe (day)",
+                    "Safe (night)",
+                    "Wellbeing"
+                  ],
+                  "range": ["#3b82f6", "#14b8a6", "#f59e0b", "#8b5cf6"]
+                },
+                "legend": null
+              },
+              "tooltip": [
+                {"field": "suburb", "type": "nominal", "title": "Suburb"},
+                {
+                  "field": "metric_label",
+                  "type": "nominal",
+                  "title": "Indicator"
+                },
+                {
+                  "field": "value",
+                  "type": "quantitative",
+                  "title": "Score",
+                  "format": ".1f"
+                },
+                {
+                  "field": "avg_score",
+                  "type": "quantitative",
+                  "title": "Average score",
+                  "format": ".1f"
+                }
+              ],
+              "order": {"field": "metric_order", "type": "quantitative"}
+            }
+          },
+          {
+            "mark": {
+              "type": "text",
+              "font": "Arial",
+              "fontSize": 8,
+              "fontWeight": "bold",
+              "color": "#374151"
+            },
+            "encoding": {
+              "theta": {
+                "field": "metric_label",
+                "type": "nominal",
+                "sort": [
+                  "Quality of life",
+                  "Safe (day)",
+                  "Safe (night)",
+                  "Wellbeing"
+                ]
+              },
+              "radius": {
+                "field": "label_radius",
+                "type": "quantitative",
+                "scale": {"domain": [0, 100], "range": [14, 48]}
+              },
+              "text": {
+                "field": "value",
+                "type": "quantitative",
+                "format": ".0f"
+              },
+              "order": {"field": "metric_order", "type": "quantitative"}
+            }
+          },
+          {
+            "transform": [{"filter": "datum.metric === 'quality_of_life'"}],
+            "mark": {
+              "type": "text",
+              "font": "Arial",
+              "fontSize": 9,
+              "fontWeight": "bold",
+              "color": "#6b7280"
+            },
+            "encoding": {
+              "text": {
+                "field": "avg_score",
+                "type": "quantitative",
+                "format": ".1f"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "background": "white",
+    "view": {"stroke": null},
+    "axis": {
+      "domain": false,
+      "ticks": false,
+      "labels": false,
+      "title": null,
+      "grid": false
+    }
+  }
+}

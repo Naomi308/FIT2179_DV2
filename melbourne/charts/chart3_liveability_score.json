@@ -1,0 +1,156 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.2.json",
+  "title": {
+    "text": "Melbourne’s Strongest Liveability Indicators",
+    "subtitle": "Top-performing city-level percentage indicators in 2019",
+    "anchor": "start",
+    "font": "Arial",
+    "fontSize": 18,
+    "fontWeight": "bold",
+    "subtitleFont": "Arial",
+    "subtitleFontSize": 12,
+    "subtitleColor": "#5f6b7a",
+    "offset": 14
+  },
+  "width": 620,
+  "height": {"step": 32},
+  "params": [
+    {
+      "name": "Top_N",
+      "value": 10,
+      "bind": {
+        "input": "range",
+        "min": 5,
+        "max": 20,
+        "step": 1,
+        "name": "Show top N indicators: "
+      }
+    }
+  ],
+  "data": {
+    "url": "https://raw.githubusercontent.com/Naomi308/FIT2129_DV2/master/melbourne/data/city-of-melbourne-liveability-and-social-indicators.csv",
+    "format": {"type": "csv"}
+  },
+  "transform": [
+    {"filter": "datum.value_type === 'Percentage' && datum.period === '2019'"},
+    {"calculate": "toNumber(datum.value)", "as": "score"},
+    {
+      "filter": "datum.id !== 'FOOD_1' && datum.id !== 'FOOD_2' && datum.id !== 'FOOD_3' && datum.id !== 'FOOD_4'"
+    },
+    {
+      "calculate": "datum.id === 'CULT_1' ? 'Cultural diversity' : datum.id === 'CULT_2' ? 'Indigenous relationship' : datum.id === 'ACT_5' ? 'Participated in learning activities' : datum.id === 'CULT_3' ? 'Feel safe in neighbourhood (daytime)' : datum.id === 'CULT_5' ? 'Feel safe on public transport (daytime)' : datum.id === 'PHYS_1' ? 'Excellent/ very good health' : datum.id === 'PHYS_3' ? 'Participated in sports or exercise' : datum.id === 'PHYS_4' ? 'Participated in sports or exercise in the city' : datum.id === 'PHYS_2' ? 'Adequate physical activity' : datum.id === 'PHYS_5' ? 'Participated in organised physical activity' : datum.id === 'PHYS_6' ? 'Used fitness or leisure centres' : datum.id === 'PHYS_7' ? 'Participated in sports club activity' : datum.id === 'ACT_1' ? 'Volunteered' : datum.id === 'ACT_2' ? 'Volunteered in the city' : datum.id === 'ACT_3' ? 'Attended arts or cultural activities' : datum.id === 'ACT_4' ? 'Attended arts or cultural activities in the city' : datum.id === 'ACT_6' ? 'Learning activity in the city' : datum.id === 'ACT_7' ? 'Influenced government decisions' : datum.id === 'ACT_8' ? 'Influenced City of Melbourne decisions' : datum.id === 'CULT_4' ? 'Feel safe in neighbourhood (nighttime)' : datum.id === 'CULT_6' ? 'Feel safe on public transport (nighttime)' : datum.id === 'FOOD_5' ? 'Produced and consumed own food' : datum.id === 'FOOD_6' ? 'Met recommended fruit and vegetable intake' : datum.indicator",
+      "as": "indicator_short"
+    },
+    {
+      "window": [{"op": "rank", "as": "rank"}],
+      "sort": [{"field": "score", "order": "descending"}]
+    },
+    {"filter": "datum.rank <= Top_N"}
+  ],
+  "layer": [
+    {
+      "mark": {"type": "bar", "cornerRadiusEnd": 4, "height": {"band": 0.7}},
+      "encoding": {
+        "y": {
+          "field": "indicator_short",
+          "type": "nominal",
+          "sort": {"field": "rank", "order": "ascending"},
+          "axis": {
+            "title": null,
+            "labelFont": "Arial",
+            "labelFontSize": 11,
+            "labelColor": "#1f2937",
+            "labelLimit": 290,
+            "labelPadding": 6
+          }
+        },
+        "x": {
+          "field": "score",
+          "type": "quantitative",
+          "scale": {"domain": [0, 100]},
+          "axis": {
+            "title": "Score",
+            "titleFont": "Arial",
+            "titleFontSize": 12,
+            "labelFont": "Arial",
+            "labelFontSize": 11,
+            "grid": true,
+            "tickCount": 6
+          }
+        },
+        "color": {
+          "field": "topic",
+          "type": "nominal",
+          "legend": {
+            "title": "Topic",
+            "orient": "bottom",
+            "direction": "horizontal",
+            "labelFont": "Arial",
+            "labelFontSize": 11,
+            "titleFont": "Arial",
+            "titleFontSize": 12,
+            "titleFontWeight": "bold"
+          },
+          "scale": {"scheme": "tableau10"}
+        },
+        "tooltip": [
+          {"field": "indicator", "type": "nominal", "title": "Indicator"},
+          {
+            "field": "indicator_short",
+            "type": "nominal",
+            "title": "Short label"
+          },
+          {"field": "topic", "type": "nominal", "title": "Topic"},
+          {"field": "type", "type": "nominal", "title": "Type"},
+          {"field": "period", "type": "nominal", "title": "Year"},
+          {
+            "field": "score",
+            "type": "quantitative",
+            "title": "Value",
+            "format": ".1f"
+          },
+          {"field": "rank", "type": "ordinal", "title": "Rank"}
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 5,
+        "font": "Arial",
+        "fontSize": 10.5,
+        "fontWeight": "bold",
+        "color": "#374151"
+      },
+      "encoding": {
+        "y": {
+          "field": "indicator_short",
+          "type": "nominal",
+          "sort": {"field": "rank", "order": "ascending"}
+        },
+        "x": {
+          "field": "score",
+          "type": "quantitative",
+          "scale": {"domain": [0, 100]}
+        },
+        "text": {"field": "score", "type": "quantitative", "format": ".1f"}
+      }
+    },
+    {
+      "mark": {
+        "type": "rule",
+        "strokeDash": [4, 4],
+        "color": "#9ca3af",
+        "strokeWidth": 1
+      },
+      "encoding": {"x": {"datum": 80}}
+    }
+  ],
+  "config": {
+    "background": "white",
+    "view": {"stroke": null},
+    "axis": {"domain": false, "ticks": false}
+  }
+}

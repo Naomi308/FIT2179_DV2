@@ -1,0 +1,259 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.2.json",
+  "title": {
+    "text": "Safety as a Key Part of Melbourne’s Liveability",
+    "subtitle": "Perceived safety in 2019 compared with latest available safety and crime indicators",
+    "anchor": "start",
+    "font": "Arial",
+    "fontSize": 18,
+    "fontWeight": "bold",
+    "subtitleFont": "Arial",
+    "subtitleFontSize": 12,
+    "subtitleColor": "#5f6b7a",
+    "offset": 14
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/Naomi308/FIT2129_DV2/master/melbourne/data/city-of-melbourne-liveability-and-social-indicators.csv",
+    "format": {"type": "csv"}
+  },
+  "hconcat": [
+    {
+      "title": {
+        "text": "Resident Safety Perception",
+        "subtitle": "2019 percentage / score",
+        "anchor": "start",
+        "font": "Arial",
+        "fontSize": 14,
+        "fontWeight": "bold",
+        "subtitleFontSize": 11,
+        "subtitleColor": "#6b7280"
+      },
+      "width": 340,
+      "height": 260,
+      "transform": [
+        {
+          "filter": "datum.period === '2019' && (datum.id === 'CULT_3' || datum.id === 'CULT_4' || datum.id === 'CULT_5' || datum.id === 'CULT_6' || datum.id === 'WELL_7')"
+        },
+        {"calculate": "toNumber(datum.value)", "as": "score"},
+        {
+          "calculate": "datum.id === 'CULT_3' ? 'Neighbourhood safety - day' : datum.id === 'CULT_4' ? 'Neighbourhood safety - night' : datum.id === 'CULT_5' ? 'Public transport safety - day' : datum.id === 'CULT_6' ? 'Public transport safety - night' : 'Satisfaction with feeling safe'",
+          "as": "indicator_short"
+        },
+        {
+          "calculate": "datum.id === 'CULT_3' ? 1 : datum.id === 'CULT_5' ? 2 : datum.id === 'WELL_7' ? 3 : datum.id === 'CULT_4' ? 4 : 5",
+          "as": "indicator_order"
+        }
+      ],
+      "layer": [
+        {
+          "mark": {
+            "type": "bar",
+            "cornerRadiusEnd": 4,
+            "height": {"band": 0.68}
+          },
+          "encoding": {
+            "y": {
+              "field": "indicator_short",
+              "type": "nominal",
+              "sort": {"field": "indicator_order", "order": "ascending"},
+              "axis": {
+                "title": null,
+                "labelFont": "Arial",
+                "labelFontSize": 11,
+                "labelColor": "#1f2937",
+                "labelLimit": 190
+              }
+            },
+            "x": {
+              "field": "score",
+              "type": "quantitative",
+              "scale": {"domain": [0, 100]},
+              "axis": {
+                "title": "Percentage / score",
+                "grid": true,
+                "tickCount": 6,
+                "labelFont": "Arial",
+                "labelFontSize": 11,
+                "titleFont": "Arial",
+                "titleFontSize": 12
+              }
+            },
+            "color": {
+              "field": "score",
+              "type": "quantitative",
+              "scale": {"domain": [0, 100], "scheme": "blues"},
+              "legend": null
+            },
+            "tooltip": [
+              {"field": "indicator", "type": "nominal", "title": "Indicator"},
+              {"field": "period", "type": "nominal", "title": "Year"},
+              {
+                "field": "score",
+                "type": "quantitative",
+                "title": "Value",
+                "format": ".1f"
+              }
+            ]
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "baseline": "middle",
+            "dx": 5,
+            "font": "Arial",
+            "fontSize": 10.5,
+            "fontWeight": "bold",
+            "color": "#374151"
+          },
+          "encoding": {
+            "y": {
+              "field": "indicator_short",
+              "type": "nominal",
+              "sort": {"field": "indicator_order", "order": "ascending"}
+            },
+            "x": {
+              "field": "score",
+              "type": "quantitative",
+              "scale": {"domain": [0, 100]}
+            },
+            "text": {"field": "score", "type": "quantitative", "format": ".1f"}
+          }
+        },
+        {
+          "mark": {
+            "type": "rule",
+            "strokeDash": [4, 4],
+            "color": "#9ca3af",
+            "strokeWidth": 1
+          },
+          "encoding": {"x": {"datum": 80}}
+        }
+      ]
+    },
+    {
+      "title": {
+        "text": "Safety and Crime Context",
+        "subtitle": "Latest available number per 100,000 people",
+        "anchor": "start",
+        "font": "Arial",
+        "fontSize": 14,
+        "fontWeight": "bold",
+        "subtitleFontSize": 11,
+        "subtitleColor": "#6b7280"
+      },
+      "width": 340,
+      "height": 260,
+      "transform": [
+        {
+          "filter": "(datum.id === 'FIRE_5' && datum.period === 'FY 2017/18') || (datum.id === 'FIRE_6' && datum.period === 'FY 2017/18') || (datum.id === 'FIRE_4' && datum.period === 'FY 2017/18') || (datum.id === 'FIRE_3' && datum.period === '2018 (June Qtr)') || (datum.id === 'FIRE_1' && datum.period === '2018 (at 30 June)')"
+        },
+        {"calculate": "toNumber(datum.value)", "as": "score"},
+        {
+          "calculate": "datum.id === 'FIRE_5' ? 'Property crime' : datum.id === 'FIRE_6' ? 'Violent crime' : datum.id === 'FIRE_4' ? 'Homicides' : datum.id === 'FIRE_3' ? 'Police officers' : 'Firefighters'",
+          "as": "indicator_short"
+        },
+        {
+          "calculate": "datum.id === 'FIRE_5' || datum.id === 'FIRE_6' || datum.id === 'FIRE_4' ? 'Crime indicator' : 'Safety service capacity'",
+          "as": "indicator_group"
+        },
+        {
+          "calculate": "datum.id === 'FIRE_5' ? 1 : datum.id === 'FIRE_6' ? 2 : datum.id === 'FIRE_4' ? 3 : datum.id === 'FIRE_3' ? 4 : 5",
+          "as": "indicator_order"
+        }
+      ],
+      "layer": [
+        {
+          "mark": {
+            "type": "bar",
+            "cornerRadiusEnd": 4,
+            "height": {"band": 0.68}
+          },
+          "encoding": {
+            "y": {
+              "field": "indicator_short",
+              "type": "nominal",
+              "sort": {"field": "indicator_order", "order": "ascending"},
+              "axis": {
+                "title": null,
+                "labelFont": "Arial",
+                "labelFontSize": 11,
+                "labelColor": "#1f2937",
+                "labelLimit": 180
+              }
+            },
+            "x": {
+              "field": "score",
+              "type": "quantitative",
+              "axis": {
+                "title": "Number per 100,000 people",
+                "grid": true,
+                "labelFont": "Arial",
+                "labelFontSize": 11,
+                "titleFont": "Arial",
+                "titleFontSize": 12
+              }
+            },
+            "color": {
+              "field": "indicator_group",
+              "type": "nominal",
+              "scale": {
+                "domain": ["Crime indicator", "Safety service capacity"],
+                "range": ["#f97316", "#2563eb"]
+              },
+              "legend": {
+                "title": "Indicator type",
+                "orient": "bottom",
+                "direction": "horizontal",
+                "labelFont": "Arial",
+                "labelFontSize": 11,
+                "titleFont": "Arial",
+                "titleFontSize": 12,
+                "titleFontWeight": "bold"
+              }
+            },
+            "tooltip": [
+              {"field": "indicator", "type": "nominal", "title": "Indicator"},
+              {"field": "period", "type": "nominal", "title": "Period"},
+              {
+                "field": "score",
+                "type": "quantitative",
+                "title": "Value",
+                "format": ",.1f"
+              },
+              {"field": "indicator_group", "type": "nominal", "title": "Type"}
+            ]
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "baseline": "middle",
+            "dx": 5,
+            "font": "Arial",
+            "fontSize": 10.5,
+            "fontWeight": "bold",
+            "color": "#374151"
+          },
+          "encoding": {
+            "y": {
+              "field": "indicator_short",
+              "type": "nominal",
+              "sort": {"field": "indicator_order", "order": "ascending"}
+            },
+            "x": {"field": "score", "type": "quantitative"},
+            "text": {"field": "score", "type": "quantitative", "format": ",.1f"}
+          }
+        }
+      ]
+    }
+  ],
+  "resolve": {"scale": {"x": "independent", "color": "independent"}},
+  "config": {
+    "background": "white",
+    "view": {"stroke": null},
+    "axis": {"domain": false, "ticks": false}
+  }
+}
