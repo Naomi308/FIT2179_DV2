@@ -1,0 +1,234 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Diversity in Victoria",
+    "subtitle": "Country of birth, non-English languages spoken at home, and religious affiliation",
+    "anchor": "start",
+    "font": "Arial",
+    "fontSize": 18,
+    "fontWeight": "bold",
+    "subtitleFont": "Arial",
+    "subtitleFontSize": 12,
+    "subtitleColor": "#5f6b7a",
+    "offset": 14
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/Naomi308/FIT2129_DV2/master/melbourne/data/diversity_donut_cleaned.csv",
+    "format": {"type": "csv"}
+  },
+  "hconcat": [
+    {
+      "title": {
+        "text": "Country of Birth",
+        "anchor": "middle",
+        "font": "Arial",
+        "fontSize": 14,
+        "fontWeight": "bold"
+      },
+      "width": 230,
+      "height": 230,
+      "transform": [
+        {"filter": "datum.dimension == 'Country of birth'"},
+        {"filter": "datum.category != 'Other countries/regions'"},
+        {"calculate": "toNumber(datum.value)", "as": "count"},
+        {
+          "joinaggregate": [
+            {"op": "sum", "field": "count", "as": "total_count"}
+          ]
+        },
+        {
+          "calculate": "datum.count / datum.total_count * 100",
+          "as": "share_recalculated"
+        }
+      ],
+      "mark": {
+        "type": "arc",
+        "innerRadius": 60,
+        "stroke": "white",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "theta": {"field": "count", "type": "quantitative", "stack": true},
+        "color": {
+          "field": "category",
+          "type": "nominal",
+          "scale": {"scheme": "tableau20"},
+          "legend": {
+            "title": "Country / region",
+            "orient": "bottom",
+            "columns": 1,
+            "labelFont": "Arial",
+            "labelFontSize": 9,
+            "titleFont": "Arial",
+            "titleFontSize": 11,
+            "titleFontWeight": "bold"
+          }
+        },
+        "order": {
+          "field": "count",
+          "type": "quantitative",
+          "sort": "descending"
+        },
+        "tooltip": [
+          {"field": "category", "type": "nominal", "title": "Category"},
+          {
+            "field": "count",
+            "type": "quantitative",
+            "title": "Count",
+            "format": ",.0f"
+          },
+          {
+            "field": "share_recalculated",
+            "type": "quantitative",
+            "title": "Recalculated share (%)",
+            "format": ".2f"
+          }
+        ]
+      }
+    },
+    {
+      "title": {
+        "text": "Language Spoken",
+        "anchor": "middle",
+        "font": "Arial",
+        "fontSize": 14,
+        "fontWeight": "bold"
+      },
+      "width": 230,
+      "height": 230,
+      "transform": [
+        {"filter": "datum.dimension == 'Language spoken'"},
+        {"filter": "datum.category != 'Other non-English languages'"},
+        {"calculate": "toNumber(datum.value)", "as": "count"},
+        {
+          "joinaggregate": [
+            {"op": "sum", "field": "count", "as": "total_count"}
+          ]
+        },
+        {
+          "calculate": "datum.count / datum.total_count * 100",
+          "as": "share_recalculated"
+        }
+      ],
+      "mark": {
+        "type": "arc",
+        "innerRadius": 60,
+        "stroke": "white",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "theta": {"field": "count", "type": "quantitative", "stack": true},
+        "color": {
+          "field": "category",
+          "type": "nominal",
+          "scale": {"scheme": "tableau20"},
+          "legend": {
+            "title": "Language",
+            "orient": "bottom",
+            "columns": 1,
+            "labelFont": "Arial",
+            "labelFontSize": 9,
+            "titleFont": "Arial",
+            "titleFontSize": 11,
+            "titleFontWeight": "bold"
+          }
+        },
+        "order": {
+          "field": "count",
+          "type": "quantitative",
+          "sort": "descending"
+        },
+        "tooltip": [
+          {"field": "category", "type": "nominal", "title": "Category"},
+          {
+            "field": "count",
+            "type": "quantitative",
+            "title": "Count",
+            "format": ",.0f"
+          },
+          {
+            "field": "share_recalculated",
+            "type": "quantitative",
+            "title": "Recalculated share (%)",
+            "format": ".2f"
+          }
+        ]
+      }
+    },
+    {
+      "title": {
+        "text": "Religious Affiliation",
+        "anchor": "middle",
+        "font": "Arial",
+        "fontSize": 14,
+        "fontWeight": "bold"
+      },
+      "width": 230,
+      "height": 230,
+      "transform": [
+        {"filter": "datum.dimension == 'Religious affiliation'"},
+        {"filter": "datum.category != 'No religion / secular'"},
+        {"calculate": "toNumber(datum.value)", "as": "count"},
+        {
+          "joinaggregate": [
+            {"op": "sum", "field": "count", "as": "total_count"}
+          ]
+        },
+        {
+          "calculate": "datum.count / datum.total_count * 100",
+          "as": "share_recalculated"
+        }
+      ],
+      "mark": {
+        "type": "arc",
+        "innerRadius": 60,
+        "stroke": "white",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "theta": {"field": "count", "type": "quantitative", "stack": true},
+        "color": {
+          "field": "category",
+          "type": "nominal",
+          "scale": {"scheme": "tableau20"},
+          "legend": {
+            "title": "Affiliation",
+            "orient": "bottom",
+            "columns": 1,
+            "labelFont": "Arial",
+            "labelFontSize": 9,
+            "titleFont": "Arial",
+            "titleFontSize": 11,
+            "titleFontWeight": "bold"
+          }
+        },
+        "order": {
+          "field": "count",
+          "type": "quantitative",
+          "sort": "descending"
+        },
+        "tooltip": [
+          {"field": "category", "type": "nominal", "title": "Category"},
+          {
+            "field": "count",
+            "type": "quantitative",
+            "title": "Count",
+            "format": ",.0f"
+          },
+          {
+            "field": "share_recalculated",
+            "type": "quantitative",
+            "title": "Recalculated share (%)",
+            "format": ".2f"
+          }
+        ]
+      }
+    }
+  ],
+  "resolve": {"scale": {"color": "independent"}},
+  "config": {
+    "background": "white",
+    "view": {"stroke": null},
+    "legend": {"symbolType": "circle", "symbolSize": 70}
+  }
+}
