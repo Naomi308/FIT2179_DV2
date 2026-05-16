@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Melbourne Liveability Dashboard</title>
+
+  <link rel="stylesheet" href="style.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+
+<body>
+  <header class="site-header">
+    <nav class="navbar">
+      <a href="#overview" class="brand">Melbourne Dashboard</a>
+
+      <div class="nav-links">
+        <a href="#liveability">Liveability</a>
+        <a href="#venues">Venues</a>
+        <a href="#diversity">Diversity</a>
+        <a href="#pulse">City Pulse</a>
+        <a href="#landmarks">Landmarks</a>
+      </div>
+    </nav>
+
+    <section id="overview" class="hero">
+      <p class="eyebrow">FIT2179 Data Visualisation Project</p>
+
+      <h1>Melbourne: A Liveable, Diverse and Culturally Active City</h1>
+
+      <p class="hero-text">
+        This dashboard explores why Melbourne is often perceived as a highly liveable city.
+        It combines social indicators, neighbourhood liveability, cafes and restaurants,
+        venue types, cultural diversity, pedestrian movement, and landmarks across the
+        City of Melbourne.
+      </p>
+
+      <div class="hero-stats">
+        <div>
+          <span>01</span>
+          <p>Liveability and safety indicators</p>
+        </div>
+        <div>
+          <span>02</span>
+          <p>Cafes, restaurants and urban venues</p>
+        </div>
+        <div>
+          <span>03</span>
+          <p>Diversity, movement and landmarks</p>
+        </div>
+      </div>
+    </section>
+  </header>
+
+  <main>
+    <section id="liveability" class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Liveability</p>
+        <h2>What makes Melbourne highly liveable?</h2>
+        <p>
+          This section compares Melbourne’s strongest liveability indicators, suburb-level
+          performance, wellbeing profile and safety conditions. Together, these charts show
+          how liveability is shaped by wellbeing, safety, cultural acceptance and daily urban experience.
+        </p>
+      </div>
+
+      <div class="chart-grid">
+        <article class="chart-card chart-wide">
+          <div class="chart-text">
+            <h3>Melbourne’s strongest liveability indicators</h3>
+            <p>
+              This chart highlights the indicators where Melbourne performs well, helping explain
+              why the city is often seen as a desirable and liveable place.
+            </p>
+          </div>
+          <div id="chart1" class="chart"></div>
+        </article>
+
+        <article class="chart-card">
+          <div class="chart-text">
+            <h3>Suburb liveability profile</h3>
+            <p>
+              Selected suburbs are compared across quality of life, daytime safety, night-time safety
+              and wellbeing score.
+            </p>
+          </div>
+          <div id="chart2" class="chart"></div>
+        </article>
+
+        <article class="chart-card">
+          <div class="chart-text">
+            <h3>Wellbeing profile</h3>
+            <p>
+              This visual shows the relative strength of different wellbeing dimensions, giving a
+              more detailed view of residents’ quality of life.
+            </p>
+          </div>
+          <div id="chart3" class="chart"></div>
+        </article>
+
+        <article class="chart-card chart-wide">
+          <div class="chart-text">
+            <h3>Safety comparison</h3>
+            <p>
+              Safety is a key part of liveability. This chart separates perceived safety from broader
+              safety and crime-related context.
+            </p>
+          </div>
+          <div id="chart4" class="chart"></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="venues" class="section section-muted">
+      <div class="section-heading">
+        <p class="eyebrow">Food, venues and urban activity</p>
+        <h2>Where are Melbourne’s cafes, restaurants and venues concentrated?</h2>
+        <p>
+          This section explores Melbourne’s hospitality and venue landscape. The map shows where
+          cafes and restaurants are located, while the bar chart summarises the broader venue mix
+          across the city.
+        </p>
+      </div>
+
+      <div class="chart-grid">
+        <article class="chart-card chart-wide">
+          <div class="chart-text">
+            <h3>Cafes and restaurants map</h3>
+            <p>
+              This interactive map shows 2024 cafe and restaurant locations by seating capacity,
+              supported by locality boundaries and the City of Melbourne municipal outline.
+            </p>
+          </div>
+          <div id="chart5" class="chart"></div>
+        </article>
+
+        <article class="chart-card chart-wide">
+          <div class="chart-text">
+            <h3>Venue types in Melbourne</h3>
+            <p>
+              Venues are grouped into broader categories such as restaurants, cafes, food retail,
+              nightlife, leisure, fitness and transport to show Melbourne’s urban activity mix.
+            </p>
+          </div>
+          <div id="chart6" class="chart"></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="diversity" class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Diversity</p>
+        <h2>Melbourne’s social and cultural diversity</h2>
+        <p>
+          Melbourne’s diversity is shown through country of birth, languages spoken and religious
+          affiliation. These charts present diversity across multiple dimensions rather than relying
+          on one single measure.
+        </p>
+      </div>
+
+      <div class="chart-grid">
+        <article class="chart-card chart-wide">
+          <div class="chart-text">
+            <h3>Diversity profile</h3>
+            <p>
+              The donut charts compare country of birth, non-English languages and religious
+              affiliation. Percentages are recalculated after excluding broad residual categories.
+            </p>
+          </div>
+          <div id="chart7" class="chart"></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="pulse" class="section section-muted">
+      <div class="section-heading">
+        <p class="eyebrow">City pulse</p>
+        <h2>How does Melbourne move through time?</h2>
+        <p>
+          Pedestrian activity provides a direct view of the city’s daily rhythm. This chart allows users
+          to zoom into selected time periods and compare movement patterns around major cultural
+          and sporting events.
+        </p>
+      </div>
+
+      <div class="chart-grid">
+        <article class="chart-card chart-wide">
+          <div class="chart-text">
+            <h3>Melbourne’s daily pulse</h3>
+            <p>
+              Drag across the smaller overview chart to zoom into a specific time period on the
+              main chart.
+            </p>
+          </div>
+          <div id="chart8" class="chart"></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="landmarks" class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Landmarks and places of interest</p>
+        <h2>Melbourne’s civic, cultural and community infrastructure</h2>
+        <p>
+          This map visualises landmarks and places of interest, including schools, theatres, health
+          services, sports facilities, places of worship, galleries and museums.
+        </p>
+      </div>
+
+      <div class="chart-grid">
+        <article class="chart-card chart-wide">
+          <div class="chart-text">
+            <h3>Landmarks and places of interest</h3>
+            <p>
+              Users can zoom and filter by landmark group to explore the city’s cultural and civic
+              infrastructure at a more detailed level.
+            </p>
+          </div>
+          <div id="chart9" class="chart"></div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>
+      Data sources: City of Melbourne Open Data and cleaned datasets prepared for the FIT2179
+      Data Visualisation project.
+    </p>
+  </footer>
+
+  <script>
+    const chartSpecs = [
+      {
+        id: "#chart1",
+        spec: "charts/chart1_ranking.json"
+      },
+      {
+        id: "#chart2",
+        spec: "charts/chart2_suburb_liveability.json"
+      },
+      {
+        id: "#chart3",
+        spec: "charts/chart3_liveability_score.json"
+      },
+      {
+        id: "#chart4",
+        spec: "charts/chart4_safetycomparison.json"
+      },
+      {
+        id: "#chart5",
+        spec: "charts/chart5_cfmap.json"
+      },
+      {
+        id: "#chart6",
+        spec: "charts/chart6_venuecount.json"
+      },
+      {
+        id: "#chart7",
+        spec: "charts/chart7_diversity.json"
+      },
+      {
+        id: "#chart8",
+        spec: "charts/chart8_daily_pulse.json"
+      },
+      {
+        id: "#chart9",
+        spec: "charts/chart9_landmarks_map.json"
+      }
+    ];
+
+    chartSpecs.forEach((chart) => {
+      vegaEmbed(chart.id, chart.spec, {
+        actions: false,
+        renderer: "svg"
+      }).catch((error) => {
+        console.error(`Error loading ${chart.spec}:`, error);
+
+        const container = document.querySelector(chart.id);
+        if (container) {
+          container.innerHTML = `
+            <div class="chart-error">
+              <strong>Chart failed to load.</strong>
+              <span>Check the file path: ${chart.spec}</span>
+            </div>
+          `;
+        }
+      });
+    });
+  </script>
+</body>
+</html>

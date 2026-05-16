@@ -1,5 +1,5 @@
 {
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.2.json",
   "title": {
     "text": "Diversity in Victoria",
     "subtitle": "Country of birth, non-English languages spoken at home, and religious affiliation",

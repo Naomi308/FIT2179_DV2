@@ -1,5 +1,5 @@
 {
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.2.json",
   "title": {
     "text": "Melbourne's Daily Pulse",
     "subtitle": "Daily pedestrian activity from 15 May 2024 to 14 May 2026 with major cultural and sporting event markers",

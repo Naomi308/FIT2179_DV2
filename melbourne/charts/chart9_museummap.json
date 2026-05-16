@@ -1,5 +1,5 @@
 {
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.2.json",
   "title": {
     "text": "Landmarks and Places of Interest in the City of Melbourne",
     "subtitle": "Interactive map of schools, theatres, health services, sports facilities, places of worship, galleries and museums",
