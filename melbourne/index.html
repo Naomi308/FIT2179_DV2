@@ -136,50 +136,61 @@
 
     <!-- SECTION 2: LIVEABILITY -->
     <section id="liveability" class="section section-muted">
-      <div class="section-heading">
-        <p class="eyebrow">Melbourne liveability</p>
-        <h2>Liveability is built from safety, wellbeing and neighbourhood experience</h2>
+  <div class="section-heading">
+    <p class="eyebrow">Melbourne liveability</p>
+    <h2>Liveability is built from safety, wellbeing and neighbourhood experience</h2>
+    <p>
+      This section moves from global reputation to local evidence. It compares neighbourhood
+      liveability, wellbeing scores and safety perceptions across selected areas of Melbourne.
+    </p>
+  </div>
+
+  <!-- Row 1: Suburb liveability profile -->
+  <div class="chart-grid">
+    <article class="chart-card chart-wide">
+      <div class="chart-text">
+        <h3>Suburb liveability profile</h3>
         <p>
-          This section moves from global reputation to local evidence. It compares neighbourhood
-          liveability, wellbeing scores and safety perceptions across selected areas of Melbourne.
+          Selected suburbs are compared across quality of life, daytime safety, night-time safety
+          and wellbeing score.
         </p>
       </div>
+      <div id="chart2" class="chart"></div>
+    </article>
+  </div>
 
-      <div class="chart-grid">
-        <article class="chart-card chart-wide">
-          <div class="chart-text">
-            <h3>Suburb liveability profile</h3>
-            <p>
-              Selected suburbs are compared across quality of life, daytime safety, night-time safety
-              and wellbeing score.
-            </p>
-          </div>
-          <div id="chart2" class="chart"></div>
-        </article>
-
-        <article class="chart-card">
-          <div class="chart-text">
-            <h3>Wellbeing profile</h3>
-            <p>
-              This chart shows how wellbeing varies across local areas, helping explain the softer
-              quality-of-life side of Melbourne’s liveability.
-            </p>
-          </div>
-          <div id="chart3" class="chart"></div>
-        </article>
-
-        <article class="chart-card">
-          <div class="chart-text">
-            <h3>Safety comparison</h3>
-            <p>
-              Safety is a core part of liveability. This chart compares perceived safety across
-              different contexts.
-            </p>
-          </div>
-          <div id="chart4" class="chart"></div>
-        </article>
+  <!-- Row 2: Wellbeing + image -->
+  <div class="liveability-split">
+    <article class="chart-card wellbeing-card">
+      <div class="chart-text">
+        <h3>Wellbeing profile</h3>
+        <p>
+          This chart shows how wellbeing varies across local areas, helping explain the softer
+          quality-of-life side of Melbourne’s liveability.
+        </p>
       </div>
-    </section>
+      <div id="chart3" class="chart"></div>
+    </article>
+
+    <article class="liveability-image-card">
+      <img src="image_2.png" alt="Melbourne liveability visual" />
+    </article>
+  </div>
+
+  <!-- Row 3: Safety full-width -->
+  <div class="chart-grid liveability-bottom">
+    <article class="chart-card chart-wide safety-card">
+      <div class="chart-text">
+        <h3>Safety comparison</h3>
+        <p>
+          Safety is a core part of liveability. This chart compares perceived safety across
+          different contexts.
+        </p>
+      </div>
+      <div id="chart4" class="chart chart-large"></div>
+    </article>
+  </div>
+</section>
 
     <!-- SECTION 3: FOOD AND CULTURE -->
     <section id="food-culture" class="section">
@@ -298,8 +309,8 @@
       { id: "#chart5", spec: "charts/chart5_cfmap.json" },
       { id: "#chart6", spec: "charts/chart6_venuecount.json" },
       { id: "#chart7", spec: "charts/chart7_diversity.json" },
-      { id: "#chart8", spec: "charts/chart8_daily_pulse.json" },
-      { id: "#chart9", spec: "charts/chart9_landmarks_map.json" }
+      { id: "#chart8", spec: "charts/chart8_pedescount.json" },
+      { id: "#chart9", spec: "charts/chart9_museummap.json" }
     ];
 
     function applyChartFonts(spec) {
@@ -380,7 +391,7 @@
           const styledSpec = applyChartFonts(spec);
 
           return vegaEmbed(chart.id, styledSpec, {
-            actions: false,
+            actions: true,
             renderer: "svg"
           });
         })

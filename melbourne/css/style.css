@@ -553,3 +553,121 @@ a {
   display: block;
   margin: 0 auto;
 }
+
+/* LIVEABILITY CUSTOM LAYOUT */
+
+.liveability-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.75fr);
+  gap: 24px;
+  align-items: stretch;
+  margin-top: 24px;
+}
+
+.wellbeing-card {
+  min-width: 0;
+}
+
+.liveability-image-card {
+  background: #ffffff;
+  border: 1px solid #dde6f3;
+  border-radius: 26px;
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.075);
+  overflow: hidden;
+  min-height: 100%;
+  display: flex;
+}
+
+.liveability-image-card img {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.liveability-bottom {
+  margin-top: 24px;
+}
+
+.safety-card {
+  padding: 28px;
+}
+
+.chart-large {
+  display: flex;
+  justify-content: center;
+}
+
+#chart4 {
+  display: flex;
+  justify-content: center;
+}
+
+#chart4 .vega-embed {
+  width: auto;
+  max-width: 100%;
+}
+
+#chart4 .vega-embed svg {
+  display: block;
+  margin: 0 auto;
+}/* LIVEABILITY CUSTOM LAYOUT */
+
+.liveability-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.75fr);
+  gap: 24px;
+  align-items: stretch;
+  margin-top: 24px;
+}
+
+.wellbeing-card {
+  min-width: 0;
+}
+
+.liveability-image-card {
+  background: #ffffff;
+  border: 1px solid #dde6f3;
+  border-radius: 26px;
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.075);
+  overflow: hidden;
+  min-height: 100%;
+  display: flex;
+}
+
+.liveability-image-card img {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.liveability-bottom {
+  margin-top: 24px;
+}
+
+.safety-card {
+  padding: 28px;
+}
+
+.chart-large {
+  display: flex;
+  justify-content: center;
+}
+
+#chart4 {
+  display: flex;
+  justify-content: center;
+}
+
+#chart4 .vega-embed {
+  width: auto;
+  max-width: 100%;
+}
+
+#chart4 .vega-embed svg {
+  display: block;
+  margin: 0 auto;
+}
