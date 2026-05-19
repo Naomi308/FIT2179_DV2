@@ -1,414 +1,404 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Beyond the Ranking | Our Melbourne </title>
+    <title>Beyond the Ranking | Our Melbourne </title>
 
-  <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/style.css" />
 
-  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 </head>
 
 <body>
-  <header class="site-header">
-    <nav class="navbar">
-      <a href="#overview" class="brand"> Our Melbourne </a>
+    <header class="site-header">
+        <nav class="navbar">
+            <a href="#overview" class="brand"> Our Melbourne </a>
 
-      <div class="nav-links">
-        <a href="#global-claim">Global Claim</a>
-        <a href="#liveability">Liveability</a>
-        <a href="#food-culture">Food & Culture</a>
-        <a href="#diversity">Diversity</a>
-        <a href="#liveliness">Liveliness</a>
-      </div>
-    </nav>
+            <div class="nav-links">
+                <a href="#global-claim">Global Claim</a>
+                <a href="#liveability">Liveability</a>
+                <a href="#food-culture">Food & Culture</a>
+                <a href="#diversity">Diversity</a>
+                <a href="#liveliness">Liveliness</a>
+            </div>
+        </nav>
 
-    <section id="overview" class="hero">
-      <div class="hero-layout">
-        <div class="hero-copy">
-          <p class="eyebrow">FIT2179 Data Visualisation Project</p>
+        <section id="overview" class="hero">
+            <div class="hero-layout">
+                <div class="hero-copy">
+                    <p class="eyebrow">FIT2179 Data Visualisation Project</p>
 
-          <h1>Beyond the Ranking</h1>
+                    <h1>Beyond the Ranking</h1>
 
-          <p class="hero-text">
-            What makes Melbourne the world's best city?
-          </p>
+                    <p class="hero-text">
+                        What makes Melbourne the world's best city?
+                    </p>
 
-          <div class="hero-stats">
-            <div>
-              <span>01</span>
-              <p>The global claim</p>
+                    <div class="hero-stats">
+                        <div>
+                            <span>01</span>
+                            <p>The global claim</p>
+                        </div>
+
+                        <div>
+                            <span>02</span>
+                            <p>Melbourne liveability</p>
+                        </div>
+
+                        <div>
+                            <span>03</span>
+                            <p>Food and culture</p>
+                        </div>
+
+                        <div>
+                            <span>04</span>
+                            <p>Diversity</p>
+                        </div>
+
+                        <div>
+                            <span>05</span>
+                            <p>Liveliness</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <img src="image_1.jpg" alt="Melbourne city view" />
+                </div>
+            </div>
+        </section>
+    </header>
+
+    <main>
+        <!-- SECTION 1: GLOBAL CLAIM -->
+        <section id="global-claim" class="section">
+            <div class="section-heading">
+                <p class="eyebrow">The global claim</p>
+                <h2>Melbourne is ranked among the world’s best cities for Gen Z</h2>
+                <p>
+                     Rankings give Melbourne a global headline, but they only tell part of the story. 
+    To understand why the city stands out, we need to look beyond the number and examine the everyday experiences that shape its reputation.
+                </p>
             </div>
 
-            <div>
-              <span>02</span>
-              <p>Melbourne liveability</p>
+            <div class="score-grid">
+                <article class="score-card score-blue">
+                    <p>Food & dining</p>
+                    <h3>9.2 / 10</h3>
+                    <div class="score-track">
+                        <span style="width: 92%;"></span>
+                    </div>
+                    <small>Resident satisfaction</small>
+                </article>
+
+                <article class="score-card score-green">
+                    <p>Arts & culture</p>
+                    <h3>8.7 / 10</h3>
+                    <div class="score-track">
+                        <span style="width: 87%;"></span>
+                    </div>
+                    <small>Resident satisfaction</small>
+                </article>
+
+                <article class="score-card score-purple">
+                    <p>Education & healthcare</p>
+                    <h3>10 / 10</h3>
+                    <div class="score-track">
+                        <span style="width: 100%;"></span>
+                    </div>
+                    <small>Resident satisfaction</small>
+                </article>
+
+                <article class="score-card score-orange score-ranking">
+                    <p>Global Gen Z ranking</p>
+                    <h3>#3 globally</h3>
+                    <small>Time Out ranking</small>
+                </article>
             </div>
 
-            <div>
-              <span>03</span>
-              <p>Food and culture</p>
+            <div class="chart-grid">
+                <article class="chart-card chart-wide">
+                    <div class="chart-text">
+                        <h3>Time Out city ranking</h3>
+                        <p>
+                            Melbourne’s ranking improved from #4 in 2024–2025 to #1 in 2026, suggesting a sharp rise in
+                            its global reputation.
+                        </p>
+                    </div>
+                    <div id="chart1" class="chart"></div>
+                </article>
+            </div>
+        </section>
+
+        <!-- SECTION 2: LIVEABILITY -->
+        <section id="liveability" class="section section-muted">
+            <div class="section-heading">
+                <p class="eyebrow">Melbourne liveability</p>
+                <h2>Liveability is built from safety, wellbeing and neighbourhood experience</h2>
+                <p>
+                     Liveability in Melbourne is not only about being highly ranked. It is felt at street level: 
+    through safety, wellbeing, neighbourhood character and the comfort of moving through different parts of the city.
+                </p>
             </div>
 
-            <div>
-              <span>04</span>
-              <p>Diversity</p>
+            <!-- Row 1: Suburb liveability profile -->
+            <div class="chart-grid">
+                <article class="chart-card chart-wide">
+                    <div class="chart-text">
+                        <h3>Suburb liveability profile</h3>
+                        <p>
+                            Melbourne does not feel the same everywhere. Each suburb contributes a different version of the city, with some areas standing out for safety, others for wellbeing, and others for overall quality of life.
+                        </p>
+                    </div>
+                    <div id="chart2" class="chart"></div>
+                </article>
             </div>
 
-            <div>
-              <span>05</span>
-              <p>Liveliness</p>
+            <!-- Row 2: Wellbeing + image -->
+            <div class="liveability-split">
+                <article class="chart-card wellbeing-card">
+                    <div class="chart-text">
+                        <h3>Wellbeing profile</h3>
+                        <p>
+                        Wellbeing adds a more human layer to Melbourne’s liveability story. It shows that a successful city is not only functional, but also capable of supporting how people feel in their everyday environment.
+                        </p>
+                    </div>
+                    <div id="chart3" class="chart"></div>
+                </article>
+
+                <article class="liveability-image-card">
+                    <img src="image_2.png" alt="Melbourne liveability visual" />
+                </article>
             </div>
-          </div>
-        </div>
 
-        <div class="hero-visual">
-          <img src="image_1.jpg" alt="Melbourne city view" />
-        </div>
-      </div>
-    </section>
-  </header>
+            <!-- Row 3: Safety full-width -->
+            <div class="chart-grid liveability-bottom">
+                <article class="chart-card chart-wide safety-card">
+                    <div class="chart-text">
+                        <h3>Safety comparison</h3>
+                        <p>
+                                A city’s liveability changes across the day. Comparing safety perceptions helps show where Melbourne feels comfortable, and where the experience of the city may become more uneven after dark.
+                        </p>
+                    </div>
+                    <div id="chart4" class="chart chart-large"></div>
+                </article>
+            </div>
+        </section>
 
-  <main>
-    <!-- SECTION 1: GLOBAL CLAIM -->
-    <section id="global-claim" class="section">
-      <div class="section-heading">
-        <p class="eyebrow">The global claim</p>
-        <h2>Melbourne is ranked among the world’s best cities for Gen Z</h2>
+        <!-- SECTION 3: FOOD AND CULTURE -->
+        <section id="food-culture" class="section">
+            <div class="section-heading">
+                <p class="eyebrow">Food and culture</p>
+                <h2>Melbourne’s food and cultural infrastructure supports its identity as a vibrant city</h2>
+                <p>
+                     Melbourne’s identity is closely tied to what people do outside home and work. 
+    Its cafes, restaurants, cultural venues and public destinations create the social infrastructure that makes the city feel active and distinctive.
+                </p>
+            </div>
+
+            <div class="chart-grid">
+                <article class="chart-card chart-wide">
+                    <div class="chart-text">
+                        <h3>Cafes and restaurants map</h3>
+                        <p>
+                                Food is one of Melbourne’s most visible urban signatures. The spread of cafes and restaurants shows how dining is embedded into the city’s streets, not limited to a few tourist precincts.
+                        </p>
+                    </div>
+                    <div id="chart5" class="chart"></div>
+                </article>
+
+                <article class="chart-card chart-wide">
+                    <div class="chart-text">
+                        <h3>Landmarks and cultural places</h3>
+                        <p>
+                                Melbourne’s cultural life is not only represented by major landmarks. It is also built through theatres, galleries, museums, schools, places of worship, health services and everyday community spaces.
+                    </div>
+                    <div id="chart9" class="chart"></div>
+                </article>
+
+                <article class="chart-card chart-wide">
+                    <div class="chart-text">
+                        <h3>Venue types in Melbourne</h3>
+                        <p>
+                            The variety of venues shows how Melbourne functions as more than a business district. 
+    Restaurants, cafes, nightlife, leisure, fitness and transport spaces all contribute to the rhythm of the city.
+                        </p>
+                    </div>
+                    <div id="chart6" class="chart"></div>
+                </article>
+            </div>
+        </section>
+
+        <!-- SECTION 4: DIVERSITY -->
+        <section id="diversity" class="section section-muted">
+            <div class="section-heading">
+                <p class="eyebrow">Diversity</p>
+                <h2>Melbourne’s diversity is visible through origin, language and belief</h2>
+                <p>
+                     Melbourne’s diversity is one of the clearest reasons the city feels international without losing its local character. 
+    Country of birth, language and belief reveal how many different communities are woven into the city’s social fabric.
+                </p>
+            </div>
+
+            <div class="chart-grid">
+                <article class="chart-card chart-wide">
+                    <div class="chart-text">
+                        <h3>Diversity profile</h3>
+                        <p>
+                               Diversity in Melbourne is not a single statistic. It appears across where residents were born, the languages spoken at home and the beliefs people identify with, creating a layered picture of belonging.
+                        </p>
+                    </div>
+                    <div id="chart7" class="chart"></div>
+                </article>
+            </div>
+        </section>
+
+        <!-- SECTION 5: LIVELINESS -->
+        <section id="liveliness" class="section">
+            <div class="section-heading">
+                <p class="eyebrow">Liveliness</p>
+                <h2>Melbourne’s daily pulse shows how people move through the city</h2>
+                <p>
+                    The movement of people through the city gives Melbourne its daily pulse. 
+    Pedestrian activity helps reveal when the city feels busy, where people gather, and how major events change the rhythm of urban life.
+                </p>
+            </div>
+
+            <div class="chart-grid">
+                <article class="chart-card chart-wide">
+                    <div class="chart-text">
+                        <h3>Melbourne’s daily pulse</h3>
+                        <p>
+                        Pedestrian patterns turn the city into a timeline. By zooming into different periods, we can see how Melbourne’s streets respond to ordinary weekdays, weekends, sporting events and cultural moments.
+                        </p>
+                    </div>
+                    <div id="chart8" class="chart"></div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
         <p>
-          Melbourne is positioned as one of the best cities
-          in the world for Gen Z. The score cards highlight the strengths behind this reputation,
-          including food, arts, culture, education and healthcare.
+            Data sources: CoM Open Data Portal, Kaggle, TimeOut, Citymapper, ABS Census.
         </p>
-      </div>
+    </footer>
 
-      <div class="score-grid">
-        <article class="score-card score-blue">
-          <p>Food & dining</p>
-          <h3>9.2 / 10</h3>
-          <div class="score-track">
-            <span style="width: 92%;"></span>
-          </div>
-          <small>Resident satisfaction</small>
-        </article>
+    <script>
+        const chartSpecs = [
+            { id: "#chart1", spec: "charts/chart1_ranking.json" },
+            { id: "#chart2", spec: "charts/chart2_suburb_liveability.json" },
+            { id: "#chart3", spec: "charts/chart3_liveability_score.json" },
+            { id: "#chart4", spec: "charts/chart4_safetycomparison.json" },
+            { id: "#chart5", spec: "charts/chart5_cfmap.json" },
+            { id: "#chart6", spec: "charts/chart6_venuecount.json" },
+            { id: "#chart7", spec: "charts/chart7_diversity.json" },
+            { id: "#chart8", spec: "charts/chart8_pedescount.json" },
+            { id: "#chart9", spec: "charts/chart9_museummap.json" }
+        ];
 
-        <article class="score-card score-green">
-          <p>Arts & culture</p>
-          <h3>8.7 / 10</h3>
-          <div class="score-track">
-            <span style="width: 87%;"></span>
-          </div>
-          <small>Resident satisfaction</small>
-        </article>
+        function applyChartFonts(spec) {
+            const bodyFont = "Montserrat";
+            const titleFont = "Anton";
 
-        <article class="score-card score-purple">
-          <p>Education & healthcare</p>
-          <h3>10 / 10</h3>
-          <div class="score-track">
-            <span style="width: 100%;"></span>
-          </div>
-          <small>Resident satisfaction</small>
-        </article>
+            function walk(obj) {
+                if (!obj || typeof obj !== "object") return;
 
-        <article class="score-card score-orange score-ranking">
-          <p>Global Gen Z ranking</p>
-          <h3>#3 globally</h3>
-          <small>Time Out ranking</small>
-        </article>
-      </div>
+                if (obj.title && typeof obj.title === "object") {
+                    obj.title.font = titleFont;
+                    obj.title.fontWeight = "normal";
+                    obj.title.subtitleFont = bodyFont;
+                }
 
-      <div class="chart-grid">
-        <article class="chart-card chart-wide">
-          <div class="chart-text">
-            <h3>Time Out city ranking</h3>
-            <p>
-              Melbourne’s ranking improved from #4 in 2024–2025 to #1 in 2026, suggesting a sharp rise in its global reputation.
-            </p>
-          </div>
-          <div id="chart1" class="chart"></div>
-        </article>
-      </div>
-    </section>
+                if (obj.header && typeof obj.header === "object") {
+                    obj.header.labelFont = titleFont;
+                    obj.header.labelFontWeight = "normal";
+                    obj.header.titleFont = bodyFont;
+                }
 
-    <!-- SECTION 2: LIVEABILITY -->
-    <section id="liveability" class="section section-muted">
-  <div class="section-heading">
-    <p class="eyebrow">Melbourne liveability</p>
-    <h2>Liveability is built from safety, wellbeing and neighbourhood experience</h2>
-    <p>
-      This section moves from global reputation to local evidence. It compares neighbourhood
-      liveability, wellbeing scores and safety perceptions across selected areas of Melbourne.
-    </p>
-  </div>
+                if (obj.axis && typeof obj.axis === "object") {
+                    obj.axis.labelFont = bodyFont;
+                    obj.axis.titleFont = bodyFont;
+                }
 
-  <!-- Row 1: Suburb liveability profile -->
-  <div class="chart-grid">
-    <article class="chart-card chart-wide">
-      <div class="chart-text">
-        <h3>Suburb liveability profile</h3>
-        <p>
-          Selected suburbs are compared across quality of life, daytime safety, night-time safety
-          and wellbeing score.
-        </p>
-      </div>
-      <div id="chart2" class="chart"></div>
-    </article>
-  </div>
+                if (obj.legend && typeof obj.legend === "object") {
+                    obj.legend.labelFont = bodyFont;
+                    obj.legend.titleFont = bodyFont;
+                }
 
-  <!-- Row 2: Wellbeing + image -->
-  <div class="liveability-split">
-    <article class="chart-card wellbeing-card">
-      <div class="chart-text">
-        <h3>Wellbeing profile</h3>
-        <p>
-          This chart shows how wellbeing varies across local areas, helping explain the softer
-          quality-of-life side of Melbourne’s liveability.
-        </p>
-      </div>
-      <div id="chart3" class="chart"></div>
-    </article>
+                for (const key in obj) {
+                    walk(obj[key]);
+                }
+            }
 
-    <article class="liveability-image-card">
-      <img src="image_2.png" alt="Melbourne liveability visual" />
-    </article>
-  </div>
+            spec.config = spec.config || {};
 
-  <!-- Row 3: Safety full-width -->
-  <div class="chart-grid liveability-bottom">
-    <article class="chart-card chart-wide safety-card">
-      <div class="chart-text">
-        <h3>Safety comparison</h3>
-        <p>
-          Safety is a core part of liveability. This chart compares perceived safety across
-          different contexts.
-        </p>
-      </div>
-      <div id="chart4" class="chart chart-large"></div>
-    </article>
-  </div>
-</section>
+            spec.config.title = {
+                ...(spec.config.title || {}),
+                font: titleFont,
+                fontWeight: "normal",
+                subtitleFont: bodyFont
+            };
 
-    <!-- SECTION 3: FOOD AND CULTURE -->
-    <section id="food-culture" class="section">
-      <div class="section-heading">
-        <p class="eyebrow">Food and culture</p>
-        <h2>Melbourne’s food and cultural infrastructure supports its identity as a vibrant city</h2>
-        <p>
-          Melbourne’s reputation is strongly tied to its hospitality scene and cultural destinations.
-          This section maps cafes, restaurants, landmarks, museums and places of interest, then
-          summarises the city’s overall venue mix.
-        </p>
-      </div>
+            spec.config.axis = {
+                ...(spec.config.axis || {}),
+                labelFont: bodyFont,
+                titleFont: bodyFont
+            };
 
-      <div class="chart-grid">
-        <article class="chart-card chart-wide">
-          <div class="chart-text">
-            <h3>Cafes and restaurants map</h3>
-            <p>
-              This map shows 2024 cafe and restaurant locations by seating capacity, with locality
-              boundaries and the City of Melbourne municipal outline.
-            </p>
-          </div>
-          <div id="chart5" class="chart"></div>
-        </article>
+            spec.config.legend = {
+                ...(spec.config.legend || {}),
+                labelFont: bodyFont,
+                titleFont: bodyFont
+            };
 
-        <article class="chart-card chart-wide">
-          <div class="chart-text">
-            <h3>Landmarks and cultural places</h3>
-            <p>
-              This map displays landmarks and places of interest, including theatres, galleries,
-              museums, schools, health services, places of worship and sports facilities.
-            </p>
-          </div>
-          <div id="chart9" class="chart"></div>
-        </article>
+            spec.config.header = {
+                ...(spec.config.header || {}),
+                labelFont: titleFont,
+                labelFontWeight: "normal",
+                titleFont: bodyFont
+            };
 
-        <article class="chart-card chart-wide">
-          <div class="chart-text">
-            <h3>Venue types in Melbourne</h3>
-            <p>
-              Venues are grouped into broader categories such as restaurants, cafes, food retail,
-              nightlife, leisure, fitness and transport to show Melbourne’s urban activity mix.
-            </p>
-          </div>
-          <div id="chart6" class="chart"></div>
-        </article>
-      </div>
-    </section>
-
-    <!-- SECTION 4: DIVERSITY -->
-    <section id="diversity" class="section section-muted">
-      <div class="section-heading">
-        <p class="eyebrow">Diversity</p>
-        <h2>Melbourne’s diversity is visible through origin, language and belief</h2>
-        <p>
-          This section presents diversity across three dimensions: country of birth, languages spoken
-          and religious affiliation. Together, they show that Melbourne’s social identity is shaped by
-          multiple cultural layers.
-        </p>
-      </div>
-
-      <div class="chart-grid">
-        <article class="chart-card chart-wide">
-          <div class="chart-text">
-            <h3>Diversity profile</h3>
-            <p>
-              The donut charts compare country of birth, non-English languages and religious
-              affiliation. Percentages are recalculated after excluding broad residual categories.
-            </p>
-          </div>
-          <div id="chart7" class="chart"></div>
-        </article>
-      </div>
-    </section>
-
-    <!-- SECTION 5: LIVELINESS -->
-    <section id="liveliness" class="section">
-      <div class="section-heading">
-        <p class="eyebrow">Liveliness</p>
-        <h2>Melbourne’s daily pulse shows how people move through the city</h2>
-        <p>
-          Pedestrian activity provides a direct measure of the city’s rhythm. This chart allows users
-          to zoom into specific periods and compare movement patterns around major sporting and
-          cultural events.
-        </p>
-      </div>
-
-      <div class="chart-grid">
-        <article class="chart-card chart-wide">
-          <div class="chart-text">
-            <h3>Melbourne’s daily pulse</h3>
-            <p>
-              Drag across the smaller overview chart to zoom into a specific time period on the
-              main chart.
-            </p>
-          </div>
-          <div id="chart8" class="chart"></div>
-        </article>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <p>
-      Data sources: City of Melbourne Open Data and cleaned datasets prepared for the FIT2179
-      Data Visualisation project.
-    </p>
-  </footer>
-
-  <script>
-    const chartSpecs = [
-      { id: "#chart1", spec: "charts/chart1_ranking.json" },
-      { id: "#chart2", spec: "charts/chart2_suburb_liveability.json" },
-      { id: "#chart3", spec: "charts/chart3_liveability_score.json" },
-      { id: "#chart4", spec: "charts/chart4_safetycomparison.json" },
-      { id: "#chart5", spec: "charts/chart5_cfmap.json" },
-      { id: "#chart6", spec: "charts/chart6_venuecount.json" },
-      { id: "#chart7", spec: "charts/chart7_diversity.json" },
-      { id: "#chart8", spec: "charts/chart8_pedescount.json" },
-      { id: "#chart9", spec: "charts/chart9_museummap.json" }
-    ];
-
-    function applyChartFonts(spec) {
-      const bodyFont = "Montserrat";
-      const titleFont = "Anton";
-
-      function walk(obj) {
-        if (!obj || typeof obj !== "object") return;
-
-        if (obj.title && typeof obj.title === "object") {
-          obj.title.font = titleFont;
-          obj.title.fontWeight = "normal";
-          obj.title.subtitleFont = bodyFont;
+            walk(spec);
+            return spec;
         }
 
-        if (obj.header && typeof obj.header === "object") {
-          obj.header.labelFont = titleFont;
-          obj.header.labelFontWeight = "normal";
-          obj.header.titleFont = bodyFont;
-        }
+        chartSpecs.forEach((chart) => {
+            fetch(chart.spec)
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error(`Could not load ${chart.spec}`);
+                    }
+                    return response.json();
+                })
+                .then((spec) => {
+                    const styledSpec = applyChartFonts(spec);
 
-        if (obj.axis && typeof obj.axis === "object") {
-          obj.axis.labelFont = bodyFont;
-          obj.axis.titleFont = bodyFont;
-        }
+                    return vegaEmbed(chart.id, styledSpec, {
+                        actions: true,
+                        renderer: "svg"
+                    });
+                })
+                .catch((error) => {
+                    console.error(`Error loading ${chart.spec}:`, error);
 
-        if (obj.legend && typeof obj.legend === "object") {
-          obj.legend.labelFont = bodyFont;
-          obj.legend.titleFont = bodyFont;
-        }
-
-        for (const key in obj) {
-          walk(obj[key]);
-        }
-      }
-
-      spec.config = spec.config || {};
-
-      spec.config.title = {
-        ...(spec.config.title || {}),
-        font: titleFont,
-        fontWeight: "normal",
-        subtitleFont: bodyFont
-      };
-
-      spec.config.axis = {
-        ...(spec.config.axis || {}),
-        labelFont: bodyFont,
-        titleFont: bodyFont
-      };
-
-      spec.config.legend = {
-        ...(spec.config.legend || {}),
-        labelFont: bodyFont,
-        titleFont: bodyFont
-      };
-
-      spec.config.header = {
-        ...(spec.config.header || {}),
-        labelFont: titleFont,
-        labelFontWeight: "normal",
-        titleFont: bodyFont
-      };
-
-      walk(spec);
-      return spec;
-    }
-
-    chartSpecs.forEach((chart) => {
-      fetch(chart.spec)
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`Could not load ${chart.spec}`);
-          }
-          return response.json();
-        })
-        .then((spec) => {
-          const styledSpec = applyChartFonts(spec);
-
-          return vegaEmbed(chart.id, styledSpec, {
-            actions: true,
-            renderer: "svg"
-          });
-        })
-        .catch((error) => {
-          console.error(`Error loading ${chart.spec}:`, error);
-
-          const container = document.querySelector(chart.id);
-          if (container) {
-            container.innerHTML = `
+                    const container = document.querySelector(chart.id);
+                    if (container) {
+                        container.innerHTML = `
               <div class="chart-error">
                 <strong>Chart failed to load.</strong>
                 <span>Check the file path: ${chart.spec}</span>
               </div>
             `;
-          }
+                    }
+                });
         });
-    });
-  </script>
+    </script>
 </body>
+
 </html>
