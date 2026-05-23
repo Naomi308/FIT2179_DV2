@@ -21,7 +21,7 @@
       "bind": {
         "input": "range",
         "min": 5,
-        "max": 20,
+        "max": 15,
         "step": 1,
         "name": "Show top N indicators: "
       }
@@ -79,20 +79,35 @@
           }
         },
         "color": {
-          "field": "topic",
-          "type": "nominal",
-          "legend": {
-            "title": "Topic",
-            "orient": "bottom",
-            "direction": "horizontal",
-            "labelFont": "Arial",
-            "labelFontSize": 11,
-            "titleFont": "Arial",
-            "titleFontSize": 12,
-            "titleFontWeight": "bold"
-          },
-          "scale": {"scheme": "tableau10"}
-        },
+  "field": "topic",
+  "type": "nominal",
+  "scale": {
+    "domain": [
+      "Culture, diversity and safety",
+      "Food security and production",
+      "Health and physical activity",
+      "Participation in activities",
+      "Wellbeing"
+    ],
+    "range": [
+       "#1170aa",
+  "#fc7d0b",
+  "#57606c",
+  "#5fa2ce",
+  "#c85200"
+    ]
+  },
+  "legend": {
+    "title": "Sections",
+    "orient": "bottom",
+    "direction": "horizontal",
+    "labelFont": "Arial",
+    "labelFontSize": 11,
+    "titleFont": "Arial",
+    "titleFontSize": 12,
+    "titleFontWeight": "bold"
+  }
+},
         "tooltip": [
           {"field": "indicator", "type": "nominal", "title": "Indicator"},
           {

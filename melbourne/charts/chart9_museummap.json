@@ -2,7 +2,6 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v6.2.json",
   "title": {
     "text": "Landmarks and Places of Interest in the City of Melbourne",
-    "subtitle": "Interactive map of schools, theatres, health services, sports facilities, places of worship, galleries and museums",
     "anchor": "start",
     "font": "Arial",
     "fontSize": 18,
@@ -154,13 +153,11 @@
               "Other"
             ],
             "range": [
-              "#3b82f6",
-              "#8b5cf6",
-              "#ef4444",
-              "#10b981",
-              "#f59e0b",
-              "#ec4899",
-              "#64748b"
+               "#1170aa",
+      "#fc7d0b",
+      "#57606c",
+      "#5fa2ce",
+      "#c85200"
             ]
           },
           "legend": {

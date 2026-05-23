@@ -1,8 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.2.json",
   "title": {
-    "text": "Melbourne's Daily Pulse",
-    "subtitle": "Daily pedestrian activity from 15 May 2024 to 14 May 2026 with major cultural and sporting event markers",
+    "text": "Daily Pedestrian Activity and Major Event Markers (2024–2026)",
     "anchor": "start",
     "font": "Arial",
     "fontSize": 20,
@@ -33,7 +32,7 @@
           "mark": {
             "type": "area",
             "interpolate": "monotone",
-            "color": "#4c78a8",
+            "color": "#1170aa",
             "opacity": 0.82
           },
           "encoding": {

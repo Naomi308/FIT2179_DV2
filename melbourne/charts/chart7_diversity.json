@@ -1,8 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.2.json",
   "title": {
-    "text": "Diversity in Victoria",
-    "subtitle": "Country of birth, non-English languages spoken at home, and religious affiliation",
+    "text": "Three Dimensions of Cultural Diversity",
     "anchor": "start",
     "font": "Arial",
     "fontSize": 18,
@@ -16,6 +15,7 @@
     "url": "https://raw.githubusercontent.com/Naomi308/FIT2129_DV2/master/melbourne/data/diversity_donut_cleaned.csv",
     "format": {"type": "csv"}
   },
+  "spacing": 100,
   "hconcat": [
     {
       "title": {
@@ -25,8 +25,8 @@
         "fontSize": 14,
         "fontWeight": "bold"
       },
-      "width": 230,
-      "height": 230,
+      "width": 250,
+      "height": 250,
       "transform": [
         {"filter": "datum.dimension == 'Country of birth'"},
         {"filter": "datum.category != 'Other countries/regions'"},
@@ -43,7 +43,7 @@
       ],
       "mark": {
         "type": "arc",
-        "innerRadius": 60,
+        "innerRadius": 68,
         "stroke": "white",
         "strokeWidth": 1
       },
@@ -52,7 +52,20 @@
         "color": {
           "field": "category",
           "type": "nominal",
-          "scale": {"scheme": "tableau20"},
+          "scale": {
+  "range": [
+    "#1170aa",
+    "#fc7d0b",
+    "#a3acb9",
+    "#57606c",
+    "#5fa2ce",
+    "#c85200",
+    "#7b848f",
+    "#a3cce9",
+    "#ffbc79",
+    "#c8d0d9"
+  ]
+},
           "legend": {
             "title": "Country / region",
             "orient": "bottom",
@@ -94,8 +107,8 @@
         "fontSize": 14,
         "fontWeight": "bold"
       },
-      "width": 230,
-      "height": 230,
+      "width": 250,
+      "height": 250,
       "transform": [
         {"filter": "datum.dimension == 'Language spoken'"},
         {"filter": "datum.category != 'Other non-English languages'"},
@@ -112,7 +125,7 @@
       ],
       "mark": {
         "type": "arc",
-        "innerRadius": 60,
+        "innerRadius": 68,
         "stroke": "white",
         "strokeWidth": 1
       },
@@ -121,7 +134,18 @@
         "color": {
           "field": "category",
           "type": "nominal",
-          "scale": {"scheme": "tableau20"},
+          "scale": {"range": [
+    "#1170aa",
+    "#fc7d0b",
+    "#a3acb9",
+    "#57606c",
+    "#5fa2ce",
+    "#c85200",
+    "#7b848f",
+    "#a3cce9",
+    "#ffbc79",
+    "#c8d0d9"
+  ]},
           "legend": {
             "title": "Language",
             "orient": "bottom",
@@ -163,8 +187,8 @@
         "fontSize": 14,
         "fontWeight": "bold"
       },
-      "width": 230,
-      "height": 230,
+      "width": 250,
+      "height": 250,
       "transform": [
         {"filter": "datum.dimension == 'Religious affiliation'"},
         {"filter": "datum.category != 'No religion / secular'"},
@@ -181,7 +205,7 @@
       ],
       "mark": {
         "type": "arc",
-        "innerRadius": 60,
+        "innerRadius": 68,
         "stroke": "white",
         "strokeWidth": 1
       },
@@ -190,7 +214,18 @@
         "color": {
           "field": "category",
           "type": "nominal",
-          "scale": {"scheme": "tableau20"},
+          "scale": {"range": [
+    "#1170aa",
+    "#fc7d0b",
+    "#a3acb9",
+    "#57606c",
+    "#5fa2ce",
+    "#c85200",
+    "#7b848f",
+    "#a3cce9",
+    "#ffbc79",
+    "#c8d0d9"
+  ]},
           "legend": {
             "title": "Affiliation",
             "orient": "bottom",

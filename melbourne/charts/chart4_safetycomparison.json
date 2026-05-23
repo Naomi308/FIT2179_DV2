@@ -1,8 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.2.json",
   "title": {
-    "text": "Safety as a Key Part of Melbourne’s Liveability",
-    "subtitle": "Perceived safety in 2019 compared with latest available safety and crime indicators",
+    "text": "Perceived safety in 2019 compared with latest available safety and crime indicators",
     "anchor": "start",
     "font": "Arial",
     "fontSize": 18,
@@ -20,7 +19,7 @@
     {
       "title": {
         "text": "Resident Safety Perception",
-        "subtitle": "2019 percentage / score",
+        "subtitle": "2019 score",
         "anchor": "start",
         "font": "Arial",
         "fontSize": 14,
@@ -69,7 +68,7 @@
               "type": "quantitative",
               "scale": {"domain": [0, 100]},
               "axis": {
-                "title": "Percentage / score",
+                "title": "Score",
                 "grid": true,
                 "tickCount": 6,
                 "labelFont": "Arial",
@@ -135,7 +134,6 @@
     {
       "title": {
         "text": "Safety and Crime Context",
-        "subtitle": "Latest available number per 100,000 people",
         "anchor": "start",
         "font": "Arial",
         "fontSize": 14,

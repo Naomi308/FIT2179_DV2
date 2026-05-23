@@ -1,9 +1,9 @@
 {
-  "$schema": "https://vega.github.io/schema/vega-lite/v6.2.json",
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
   "title": {
-    "text": "Venue Types in Melbourne",
-    "subtitle": "Total number of classified venues by grouped venue type",
-    "anchor": "start",
+    "text": "Number of venues grouped by activity type",
+    "anchor": "middle",
     "font": "Arial",
     "fontSize": 18,
     "fontWeight": "bold",
@@ -12,72 +12,134 @@
     "subtitleColor": "#5f6b7a",
     "offset": 14
   },
-  "width": 700,
+
+  "width": 820,
   "height": 420,
+
   "data": {
     "url": "https://raw.githubusercontent.com/Naomi308/FIT2129_DV2/master/melbourne/data/Melbourne_venues.csv",
-    "format": {"type": "csv"}
+    "format": {
+      "type": "csv"
+    }
   },
+
   "transform": [
-    {"calculate": "lower(datum['Venue Category'])", "as": "category_lower"},
+    {
+      "calculate": "lower(datum['Venue Category'])",
+      "as": "category_lower"
+    },
     {
       "calculate": "indexof(datum.category_lower, 'café') >= 0 || indexof(datum.category_lower, 'cafe') >= 0 || indexof(datum.category_lower, 'coffee') >= 0 || indexof(datum.category_lower, 'breakfast') >= 0 || indexof(datum.category_lower, 'cafeteria') >= 0 ? 'Cafe / Coffee' : indexof(datum.category_lower, 'restaurant') >= 0 || indexof(datum.category_lower, 'ramen') >= 0 || indexof(datum.category_lower, 'thai') >= 0 || indexof(datum.category_lower, 'vietnamese') >= 0 || indexof(datum.category_lower, 'chinese') >= 0 || indexof(datum.category_lower, 'korean') >= 0 || indexof(datum.category_lower, 'japanese') >= 0 || indexof(datum.category_lower, 'dumpling') >= 0 || indexof(datum.category_lower, 'asian') >= 0 || indexof(datum.category_lower, 'malay') >= 0 || indexof(datum.category_lower, 'afghan') >= 0 || indexof(datum.category_lower, 'portuguese') >= 0 || indexof(datum.category_lower, 'steakhouse') >= 0 || indexof(datum.category_lower, 'chaat') >= 0 || indexof(datum.category_lower, 'bbq') >= 0 ? 'Restaurant' : indexof(datum.category_lower, 'pizza') >= 0 || indexof(datum.category_lower, 'burger') >= 0 || indexof(datum.category_lower, 'sandwich') >= 0 || indexof(datum.category_lower, 'fast food') >= 0 || indexof(datum.category_lower, 'food truck') >= 0 || indexof(datum.category_lower, 'kebab') >= 0 || indexof(datum.category_lower, 'fried chicken') >= 0 ? 'Fast food / casual food' : indexof(datum.category_lower, 'dessert') >= 0 || indexof(datum.category_lower, 'ice cream') >= 0 || indexof(datum.category_lower, 'frozen yogurt') >= 0 || indexof(datum.category_lower, 'cupcake') >= 0 || indexof(datum.category_lower, 'juice') >= 0 || indexof(datum.category_lower, 'bubble tea') >= 0 || indexof(datum.category_lower, 'candy') >= 0 || indexof(datum.category_lower, 'bagel') >= 0 || indexof(datum.category_lower, 'creperie') >= 0 ? 'Dessert / drinks' : indexof(datum.category_lower, 'bakery') >= 0 || indexof(datum.category_lower, 'supermarket') >= 0 || indexof(datum.category_lower, 'grocery') >= 0 || indexof(datum.category_lower, 'convenience') >= 0 || indexof(datum.category_lower, 'liquor store') >= 0 || indexof(datum.category_lower, 'big box') >= 0 ? 'Food retail' : indexof(datum.category_lower, 'bar') >= 0 || indexof(datum.category_lower, 'pub') >= 0 || indexof(datum.category_lower, 'beer') >= 0 || indexof(datum.category_lower, 'speakeasy') >= 0 || indexof(datum.category_lower, 'gastropub') >= 0 || indexof(datum.category_lower, 'cocktail') >= 0 ? 'Bars / nightlife' : indexof(datum.category_lower, 'gym') >= 0 || indexof(datum.category_lower, 'yoga') >= 0 || indexof(datum.category_lower, 'fitness') >= 0 || indexof(datum.category_lower, 'pilates') >= 0 || indexof(datum.category_lower, 'pool') >= 0 || indexof(datum.category_lower, 'sports') >= 0 || indexof(datum.category_lower, 'athletics') >= 0 || indexof(datum.category_lower, 'recreation') >= 0 ? 'Fitness / recreation' : indexof(datum.category_lower, 'movie') >= 0 || indexof(datum.category_lower, 'theater') >= 0 || indexof(datum.category_lower, 'theatre') >= 0 || indexof(datum.category_lower, 'mall') >= 0 || indexof(datum.category_lower, 'art') >= 0 || indexof(datum.category_lower, 'museum') >= 0 || indexof(datum.category_lower, 'casino') >= 0 || indexof(datum.category_lower, 'aquarium') >= 0 || indexof(datum.category_lower, 'park') >= 0 || indexof(datum.category_lower, 'bookstore') >= 0 || indexof(datum.category_lower, 'record shop') >= 0 || indexof(datum.category_lower, 'video store') >= 0 || indexof(datum.category_lower, 'plaza') >= 0 || indexof(datum.category_lower, 'social club') >= 0 || indexof(datum.category_lower, 'hobby') >= 0 || indexof(datum.category_lower, 'hotel') >= 0 ? 'Leisure / entertainment' : indexof(datum.category_lower, 'train') >= 0 || indexof(datum.category_lower, 'tram') >= 0 || indexof(datum.category_lower, 'station') >= 0 || indexof(datum.category_lower, 'gas station') >= 0 || indexof(datum.category_lower, 'rental car') >= 0 ? 'Transport' : 'Other'",
       "as": "venue_type_group"
     },
-    {"filter": "datum.venue_type_group != 'Other'"},
     {
-      "aggregate": [{"op": "count", "as": "venue_count"}],
-      "groupby": ["venue_type_group"]
+      "filter": "datum.venue_type_group != 'Other'"
+    },
+    {
+      "aggregate": [
+        {
+          "op": "count",
+          "as": "venue_count"
+        }
+      ],
+      "groupby": [
+        "venue_type_group"
+      ]
     }
   ],
-  "mark": {"type": "bar", "cornerRadiusTopLeft": 4, "cornerRadiusTopRight": 4},
-  "encoding": {
-    "x": {
-      "field": "venue_type_group",
-      "type": "nominal",
-      "sort": {"field": "venue_count", "order": "descending"},
-      "axis": {
-        "title": null,
-        "labelAngle": -45,
-        "labelAlign": "right",
-        "labelBaseline": "top",
-        "labelFont": "Arial",
-        "labelFontSize": 11,
-        "labelFontWeight": "bold",
-        "labelColor": "#1f2937"
+
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "strokeWidth": 5,
+        "color": "#F28E2B",
+        "opacity": 1
+      },
+      "encoding": {
+        "x": {
+          "field": "venue_type_group",
+          "type": "nominal",
+          "sort": {
+            "field": "venue_count",
+            "order": "descending"
+          },
+          "axis": {
+            "title": null,
+            "labelAngle": -45,
+            "labelAlign": "right",
+            "labelBaseline": "top",
+            "labelFont": "Arial",
+            "labelFontSize": 12,
+            "labelFontWeight": "bold",
+            "labelColor": "#1f2937"
+          }
+        },
+        "y": {
+          "field": "venue_count",
+          "type": "quantitative",
+          "axis": {
+            "title": "Number of venues",
+            "titleFont": "Arial",
+            "titleFontSize": 12,
+            "titleFontWeight": "bold",
+            "labelFont": "Arial",
+            "labelFontSize": 11,
+            "grid": true
+          }
+        },
+        "y2": {
+          "datum": 0
+        }
       }
     },
-    "y": {
-      "field": "venue_count",
-      "type": "quantitative",
-      "axis": {
-        "title": "Number of venues",
-        "titleFont": "Arial",
-        "titleFontSize": 12,
-        "labelFont": "Arial",
-        "labelFontSize": 11,
-        "grid": true
+    {
+      "mark": {
+        "type": "circle",
+        "size": 220,
+        "opacity": 1,
+        "color": "#4E79A7",
+        "stroke": "white",
+        "strokeWidth": 1.6
+      },
+      "encoding": {
+        "x": {
+          "field": "venue_type_group",
+          "type": "nominal",
+          "sort": {
+            "field": "venue_count",
+            "order": "descending"
+          }
+        },
+        "y": {
+          "field": "venue_count",
+          "type": "quantitative"
+        },
+        "tooltip": [
+          {
+            "field": "venue_type_group",
+            "type": "nominal",
+            "title": "Venue type"
+          },
+          {
+            "field": "venue_count",
+            "type": "quantitative",
+            "title": "Number of venues",
+            "format": ",.0f"
+          }
+        ]
       }
-    },
-    "color": {
-      "field": "venue_type_group",
-      "type": "nominal",
-      "scale": {"scheme": "tableau10"},
-      "legend": null
-    },
-    "tooltip": [
-      {"field": "venue_type_group", "type": "nominal", "title": "Venue type"},
-      {
-        "field": "venue_count",
-        "type": "quantitative",
-        "title": "Number of venues",
-        "format": ",.0f"
-      }
-    ]
-  },
+    }
+  ],
+
   "config": {
     "background": "white",
-    "view": {"stroke": null},
-    "axis": {"domain": false, "ticks": false}
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "domain": false,
+      "ticks": false
+    }
   }
 }

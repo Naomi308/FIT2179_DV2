@@ -1,8 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.2.json",
   "title": {
-    "text": "Cafes and Restaurants in the City of Melbourne",
-    "subtitle": "2024 venue locations by seating capacity and venue type",
+    "text": "Cafes and restaurants locations by seating and venue type (2024)",
     "anchor": "start",
     "font": "Arial",
     "fontSize": 18,
@@ -15,17 +14,6 @@
   "width": "container",
   "height": 520,
   "params": [
-    {
-      "name": "zoom_level",
-      "value": 250000,
-      "bind": {
-        "input": "range",
-        "min": 250000,
-        "max": 400000,
-        "step": 5000,
-        "name": "Zoom: "
-      }
-    },
     {
       "name": "center_to",
       "value": [144.9631, -37.8136],
@@ -72,7 +60,7 @@
   "projection": {
     "type": "equirectangular",
     "center": {"expr": "center_to"},
-    "scale": {"expr": "zoom_level"}
+    "scale": 365000
   },
   "layer": [
     {
@@ -189,7 +177,7 @@
           "type": "nominal",
           "scale": {
             "domain": ["Cafe", "Restaurant", "Other"],
-            "range": ["#f59e0b", "#ef4444", "#6b7280"]
+            "range": ["#1170aa","#fc7d0b","#7b848f"]
           },
           "legend": {
             "title": "Venue type",

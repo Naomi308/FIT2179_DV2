@@ -3,7 +3,6 @@
 
   "title": {
     "text": "Liveability Profiles Across Melbourne Neighbourhoods",
-    "subtitle": "Each suburb is shown as a radial chart across four liveability indicators, 2022",
     "anchor": "middle",
     "font": "Arial",
     "fontSize": 20,
@@ -65,7 +64,7 @@
       "as": "max_value"
     },
     {
-      "calculate": "datum.value > 94 ? 100 : datum.value + 6",
+      "calculate": "datum.value > 94 ? 100 : datum.value / 2",
       "as": "label_radius"
     },
     {
@@ -189,12 +188,11 @@
                 "Safe (night)",
                 "Wellbeing"
               ],
-              "range": [
-                "#3b82f6",
-                "#14b8a6",
-                "#f59e0b",
-                "#8b5cf6"
-              ]
+              "range": 
+                ["#1170aa",
+  "#fc7d0b",
+  "#5fa2ce",
+  "#c85200"]
             },
             "legend": {
               "title": "Indicator",
@@ -244,7 +242,7 @@
           "font": "Arial",
           "fontSize": 10,
           "fontWeight": "bold",
-          "color": "#374151"
+          "color": "white"
         },
         "encoding": {
           "theta": {
