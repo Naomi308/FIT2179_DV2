@@ -1,15 +1,11 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.2.json",
   "title": {
-    "text": "Melbourne’s Strongest Liveability Indicators",
-    "subtitle": "Top-performing city-level percentage indicators in 2019",
+    "text": "Melbourne’s Top-performing city-level percentage indicators (2019)",
     "anchor": "start",
     "font": "Arial",
-    "fontSize": 18,
+    "fontSize": 30,
     "fontWeight": "bold",
-    "subtitleFont": "Arial",
-    "subtitleFontSize": 12,
-    "subtitleColor": "#5f6b7a",
     "offset": 14
   },
   "width": 620,
@@ -21,7 +17,7 @@
       "bind": {
         "input": "range",
         "min": 5,
-        "max": 15,
+        "max": 20,
         "step": 1,
         "name": "Show top N indicators: "
       }
@@ -154,14 +150,56 @@
       }
     },
     {
-      "mark": {
-        "type": "rule",
-        "strokeDash": [4, 4],
-        "color": "#9ca3af",
-        "strokeWidth": 1
-      },
-      "encoding": {"x": {"datum": 80}}
+  "mark": {
+    "type": "rule",
+    "strokeDash": [4, 4],
+    "color": "#7b848f",
+    "strokeWidth": 1.2
+  },
+  "encoding": {
+    "x": {
+      "datum": 80
     }
+  }
+},
+{
+  "data": {
+    "values": [
+      {
+        "threshold": 80,
+        "label": "80% benchmark"
+      }
+    ]
+  },
+  "mark": {
+    "type": "text",
+    "align": "left",
+    "baseline": "bottom",
+    "dx": 6,
+    "dy": -6,
+    "font": "Arial",
+    "fontSize": 11,
+    "fontStyle": "italic",
+    "fontWeight": "bold",
+    "color": "#57606c"
+  },
+  "encoding": {
+    "x": {
+      "field": "threshold",
+      "type": "quantitative",
+      "scale": {
+        "domain": [0, 100]
+      }
+    },
+    "y": {
+      "value": 0
+    },
+    "text": {
+      "field": "label",
+      "type": "nominal"
+    }
+  }
+}
   ],
   "config": {
     "background": "white",

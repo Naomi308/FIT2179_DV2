@@ -195,15 +195,21 @@
   "#c85200"]
             },
             "legend": {
-              "title": "Indicator",
-              "orient": "top",
-              "direction": "horizontal",
-              "labelFont": "Arial",
-              "labelFontSize": 12,
-              "titleFont": "Arial",
-              "titleFontSize": 13,
-              "titleFontWeight": "bold"
-            }
+  "title": "Indicators",
+  "orient": "top",
+  "direction": "horizontal",
+  "columns": 4,
+  "columnPadding": 32,
+  "symbolSize": 120,
+  "symbolLimit": 0,
+  "labelLimit": 0,
+  "labelFont": "Arial",
+  "labelFontSize": 12,
+  "labelFontWeight": "normal",
+  "titleFont": "Arial",
+  "titleFontSize": 13,
+  "titleFontWeight": "bold"
+}
           },
           "tooltip": [
             {
