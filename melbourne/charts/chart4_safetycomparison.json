@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.2.json",
   "title": {
-    "text": "Perceived safety in 2019 compared with latest available safety and crime indicators",
+    "text": "Perceived safety compared with latest available safety and crime indicators",
     "anchor": "start",
     "font": "Arial",
     "fontSize": 18,
@@ -19,7 +19,6 @@
     {
       "title": {
         "text": "Resident Safety Perception",
-        "subtitle": "2019 score",
         "anchor": "start",
         "font": "Arial",
         "fontSize": 14,

@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.2.json",
   "title": {
-    "text": "Melbourne’s Top-performing city-level percentage indicators (2019)",
+    "text": "Melbourne’s Top-performing city-level percentage indicators",
     "anchor": "start",
     "font": "Arial",
     "fontSize": 30,
